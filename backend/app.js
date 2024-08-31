@@ -6,6 +6,8 @@ const projectRoutes = require('./routes/projectRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const errorHandler = require('./middleware/errorHandler');
+const cors = require('cors');
+app.use(cors());
 
 // Connect to database
 connectDb();
