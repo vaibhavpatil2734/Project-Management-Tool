@@ -6,7 +6,6 @@
   }
   
   .card {
-    left: 200%;
     border-radius: 10px; /* Rounded corners for the card */
     overflow: hidden; /* Ensure rounded corners are applied */
     transform: scale(0.98); /* Initial scale for animation effect */

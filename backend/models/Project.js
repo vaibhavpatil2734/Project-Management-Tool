@@ -16,9 +16,9 @@ const ProjectSchema = new mongoose.Schema({
     trim: true  // Trim whitespace from the description
   },
   createdBy: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User', 
-    required: true  // Ensure a reference to the User model is provided
+    type: String, 
+    required: true, 
+    trim: true    // Ensure a reference to the User model is provided
   },
 });
 

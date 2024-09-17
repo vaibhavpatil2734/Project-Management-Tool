@@ -3,19 +3,23 @@ import Register from './Components/Auth/Register';
 import Login from './Components/Auth/Login';
 import Navbar from './Components/Layout/Navbar/Navbar';
 import Sidebar from './Components/Layout/Sidebar/sidebar';
+import Body from './Components/Layout/Body/Body';
+import CreateProject from './Components/Project/CreateProject';
 
 function App() {
   return (
     <>
       <Navbar />
       <Sidebar/>
-      <div className="container mt-5">
+      <Body/>
+      
+      {/* <div className="container mt-5">
         <Routes>
-          {/* <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} /> */}
-          {/* Add more routes here as needed */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} /> 
+          <Route path="/CreateProject" element={<CreateProject/>} />
         </Routes>
-      </div>
+      </div> */}
     </>
   );
 }

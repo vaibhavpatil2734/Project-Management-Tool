@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate,Link } from 'react-router-dom'; // Import useNavigate hook
 import './sidebar.css'; // Import custom CSS for styling
 
 export default function Sidebar() {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState('');
+  const navigate = useNavigate(); // Initialize navigate
 
+  // Fetch projects from the API
   useEffect(() => {
-    // Fetch projects from an API or other source
     const fetchProjects = async () => {
-      // Example: Fetching projects from an API
-      // Replace with your actual API call
-      const response = await fetch('http://localhost:5000/api/projects');
-      const data = await response.json();
-      setProjects(data);
+      try {
+        const response = await fetch('http://localhost:5000/api/projects');
+        const data = await response.json();
+        setProjects(data.projects); // Assuming your API response has a 'projects' field
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
     };
 
     fetchProjects();
@@ -22,10 +26,7 @@ export default function Sidebar() {
     setSelectedProject(e.target.value);
   };
 
-  const handleAddProject = () => {
-    // Logic to handle adding a new project
-    alert('Add a new project');
-  };
+
 
   return (
     <div className="sidebar">
@@ -40,8 +41,8 @@ export default function Sidebar() {
             <option key={project._id} value={project._id}>{project.title}</option>
           ))}
         </select>
-        <button className="add-project-button" onClick={handleAddProject}>
-          +
+        <button className="add-project-button">
+        <Link to="/CreateProject"><b className='bcolor'>+</b></Link>
         </button>
       </div>
       <ul className="sidebar-menu">

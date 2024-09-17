@@ -38,8 +38,12 @@
     font-size: 1.25rem;
     margin-left: 0.5rem;
     transition: background-color 0.3s ease;
+  
   }
   
+  .bcolor{
+    color: white;
+  }
   .add-project-button:hover {
     background-color: #0056b3;
   }

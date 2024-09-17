@@ -3,7 +3,7 @@ const Task = require('../models/Task');
 const mongoose = require('mongoose');
 
 // Create a new project
-exports.createProject = async (req, res) => {
+exports.createProjects = async (req, res) => {
   try {
     const { title, description, createdBy } = req.body;
 
@@ -38,24 +38,3 @@ exports.getProjects = async (req, res) => {
   }
 };
 
-// Get a specific project by ID
-exports.getProjectById = async (req, res) => {
-  try {
-    const { projectId } = req.params;
-    
-    if (!mongoose.Types.ObjectId.isValid(projectId)) {
-      return res.status(400).json({ message: 'Invalid project ID' });
-    }
-
-    const project = await Project.findById(projectId).populate('createdBy', 'username');
-    
-    if (!project) {
-      return res.status(404).json({ message: 'Project not found' });
-    }
-
-    res.status(200).json({ project });
-  } catch (error) {
-    console.error('Error retrieving project:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-};
