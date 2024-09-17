@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -21,6 +19,10 @@ app.use(cors()); // Enable CORS for all origins
 app.use(express.json()); // Parse JSON bodies
 
 // Routes
+app.get("/", (req, res) => {
+  res.status(200).send("Hello World");
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);

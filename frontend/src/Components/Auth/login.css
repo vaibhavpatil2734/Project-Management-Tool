@@ -1,0 +1,34 @@
+/* login.css */
+
+.custom-card-width {
+    max-width: 500px; /* Adjust width as needed */
+    margin: 0 auto; /* Center the card */
+  }
+  
+  .card {
+    left: 200%;
+    border-radius: 10px; /* Rounded corners for the card */
+    overflow: hidden; /* Ensure rounded corners are applied */
+    transform: scale(0.98); /* Initial scale for animation effect */
+    transition: transform 0.3s ease-in-out; /* Animation effect on hover */
+  }
+  
+  .card:hover {
+    transform: scale(1); /* Scale up on hover */
+  }
+  
+  .card-body {
+    padding: 2rem; /* Adjust padding as needed */
+  }
+  
+  .form-group {
+    margin-bottom: 1rem; /* Space between form fields */
+  }
+  
+  @media (max-width: 768px) {
+    .custom-card-width {
+      width: 100%; /* Full width on smaller screens */
+      margin: 0;
+    }
+  }
+  

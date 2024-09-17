@@ -1,5 +1,3 @@
-// authController.js
-
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -7,11 +5,14 @@ require('dotenv').config();
 
 // Registration logic
 exports.register = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { name, email, password, role } = req.body;
+ 
+  console.log('Received registration request Server Side:', { name, email, password, role });
 
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
+      console.log('User already exists');
       return res.status(400).json({ msg: 'User already exists' });
     }
 
@@ -19,16 +20,18 @@ exports.register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      username,
+      name,
       email,
       password: hashedPassword,
+      role
     });
 
     await newUser.save();
 
+    console.log('User registered successfully');
     res.status(201).json({ msg: 'User registered successfully' });
   } catch (err) {
-    console.error(err.message);
+    console.error('Error during registration here:', err.message);
     res.status(500).json({ msg: 'Server error' });
   }
 };
@@ -51,8 +54,9 @@ exports.login = async (req, res) => {
     const payload = {
       user: {
         id: user.id,
-        username: user.username,
+        name: user.name,
         email: user.email,
+        role: user.role, // Include role in the payload if needed
       },
     };
 
