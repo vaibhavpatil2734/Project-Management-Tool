@@ -8,6 +8,7 @@ export default function Register() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    compId:'',
     password: '',
     role: 'user',
   });
@@ -60,6 +61,18 @@ export default function Register() {
                     id="name"
                     name="name"
                     value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group mb-3">
+                  <label htmlFor="password">Company Id</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="compId"
+                    name="compId"
+                    value={formData.compId}
                     onChange={handleChange}
                     required
                   />

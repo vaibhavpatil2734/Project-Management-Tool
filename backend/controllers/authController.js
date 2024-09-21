@@ -5,7 +5,7 @@ require('dotenv').config();
 
 // Registration logic
 exports.register = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, compId, email, password, role} = req.body;
  
   console.log('Received registration request Server Side:', { name, email, password, role });
 
@@ -21,6 +21,7 @@ exports.register = async (req, res) => {
 
     const newUser = new User({
       name,
+      compId,
       email,
       password: hashedPassword,
       role
