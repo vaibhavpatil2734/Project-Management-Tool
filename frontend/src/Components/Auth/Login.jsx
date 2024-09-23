@@ -3,13 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './login.css'; // For custom animations
 import { useNavigate, Link } from 'react-router-dom'; // Import Link
 
-export default function Login() {
+export default function Login({ getprofiledata }) { // Receive getprofiledata from props
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
-  const navigate = useNavigate(); // Uncomment this line
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,14 +28,24 @@ export default function Login() {
       });
 
       if (response.ok) {
-        const { token } = await response.json();
-        // Save the token to localStorage or handle authentication
+        const { token, profile } = await response.json();
+
+        // Pass profile data to Body component using the getprofiledata function
+        getprofiledata(profile);
+
+        // Save token to localStorage or handle authentication
         localStorage.setItem('token', token);
+
+        console.log('Login successful. Token:', token);
+
+        // Alert login success
         alert('Login successful');
-        navigate('/dashboard'); // Redirect to a different page
+        
+        // Navigate to the Profile page after sending the data
+        navigate('/Profile');
       } else {
         console.error('Login failed');
-        alert('Login failed');
+        alert('Invalid credentials, please try again');
       }
     } catch (error) {
       console.error('Error during login', error);
@@ -45,7 +55,7 @@ export default function Login() {
   return (
     <div className="container my-5 p-16">
       <div className="row justify-content-center">
-        <div className="col-lg-16 col-md-18"> {/* Fixed column classes */}
+        <div className="col-lg-16 col-md-18">
           <div className="card shadow-lg custom-card-width">
             <div className="card-body p-4">
               <h2 className="text-center mb-4 p-6">Login</h2>

@@ -50,6 +50,12 @@ exports.createProjects = async (req, res) => {
   }
 };
 
+// exports.openProject = async (req, res)=>{
+//   try {
+//   } catch (error) {
+//     res.status(500).json({message:'Server error openning projedt fail!!'})
+//   }
+// }
 // Get all projects
 exports.getProjects = async (req, res) => {
   try {

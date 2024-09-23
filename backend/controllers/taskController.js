@@ -11,7 +11,7 @@ exports.createTask = async (req, res) => {
       description,
       Priority,
       status,
-      assignedTo, // should be a valid User ObjectId
+      assignedTo, 
     });
 
     // Save the task to the database

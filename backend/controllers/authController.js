@@ -5,8 +5,8 @@ require('dotenv').config();
 
 // Registration logic
 exports.register = async (req, res) => {
-  const { name, compId, email, password, role} = req.body;
- 
+  const { name, compId, email, password, role } = req.body;
+
   console.log('Received registration request Server Side:', { name, email, password, role });
 
   try {
@@ -63,7 +63,21 @@ exports.login = async (req, res) => {
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    res.status(200).json({ token });
+    // Retrieve profile data to send back
+    const profileData = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      compId: user.compId,  // Assuming this is also part of user schema
+      // Add other fields you need to display in the profile
+    };
+
+    // Send token and profile data in the response
+    res.status(200).json({ 
+      token, 
+      profile: profileData 
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ msg: 'Server error' });
