@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
 import './Navbar.css'; // Import the CSS file for custom styling
 import { FaUserCircle } from 'react-icons/fa'; // Font Awesome for profile icon (optional)
+import {nameNav} from '../../Profile/Profile';
 
+// Navbar component
 export default function Navbar() {
 
   return (
@@ -26,6 +28,9 @@ export default function Navbar() {
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/login">Login</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/Profile">Profile</Link>
               </li>
               <li className="nav-item">
                 {/* Profile button with user name and profile icon */}

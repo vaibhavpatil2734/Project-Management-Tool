@@ -19,13 +19,13 @@ export default function CreateProject() {
 
   // Handle adding a new assigned user (compId) to the project
   const handleAddUser = () => {
-    if (!userCompId) return; // Ensure input is not empty
+    if (!userCompId.trim()) return; // Ensure input is not empty
 
     // If compId is valid, add it to assignedUsers
     if (!formData.assignedUsers.includes(userCompId)) {
       setFormData((prevState) => ({
         ...prevState,
-        assignedUsers: [...prevState.assignedUsers, userCompId], // Add compId to the list
+        assignedUsers: [...prevState.assignedUsers, userCompId.trim()], // Add trimmed compId to the list
       }));
       setUserCompId(''); // Clear the input after adding
     }
@@ -43,11 +43,20 @@ export default function CreateProject() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Retrieve the JWT token from localStorage
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      alert('No authentication token found. Please log in.');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:5000/api/projects/createProjects', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Include the token in the Authorization header
         },
         body: JSON.stringify(formData), // Send the formData as JSON
       });
@@ -127,6 +136,7 @@ export default function CreateProject() {
                 type="button"
                 className="btn btn-secondary ms-2"
                 onClick={handleAddUser}
+                disabled={!userCompId.trim()} // Disable if input is empty
               >
                 Add User
               </button>

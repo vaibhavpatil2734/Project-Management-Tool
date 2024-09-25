@@ -42,7 +42,7 @@ export default function Login({ getprofiledata }) { // Receive getprofiledata fr
         alert('Login successful');
         
         // Navigate to the Profile page after sending the data
-        navigate('/Profile');
+        // navigate('/Profile');
       } else {
         console.error('Login failed');
         alert('Invalid credentials, please try again');
