@@ -20,7 +20,13 @@ const ProjectSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'User'  // Array of references to User model
     }
-  ] // An array to store multiple user IDs who are assigned to this project
+  ], // An array to store multiple user IDs who are assigned to this project
+  
+  projectTitle: { 
+      type: String, 
+      trim: true  // Trim whitespace from the description
+    }
+
 });
 
 // Create and export the Project model

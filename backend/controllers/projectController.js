@@ -1,5 +1,5 @@
 const Project = require('../models/Project');
-const User = require('../models/User'); // Import the User model
+const User = require('../models/User');
 const mongoose = require('mongoose');
 
 // Create a new project
@@ -10,6 +10,12 @@ exports.createProjects = async (req, res) => {
     // Validate required fields
     if (!title || !description) {
       return res.status(400).json({ message: 'Title and description fields are required.' });
+    }
+
+    // Check if a project with the same title already exists
+    const existingProject = await Project.findOne({ title: title.trim() });
+    if (existingProject) {
+      return res.status(400).json({ message: 'A project with this title already exists. Please choose another title.' });
     }
 
     // Check if assignedUsers is provided and non-empty
@@ -38,7 +44,7 @@ exports.createProjects = async (req, res) => {
 
       const savedProject = await newProject.save();
       res.status(201).json({ project: savedProject });
-      
+
     } catch (error) {
       console.error('Error finding users:', error);
       return res.status(500).json({ message: 'Error finding users' });
@@ -47,25 +53,5 @@ exports.createProjects = async (req, res) => {
   } catch (error) {
     console.error('Error creating project:', error);
     res.status(500).json({ message: 'Server error' });
-  }
-};
-
-// exports.openProject = async (req, res)=>{
-//   try {
-//   } catch (error) {
-//     res.status(500).json({message:'Server error openning projedt fail!!'})
-//   }
-// }
-// Get all projects
-exports.getProjects = async (req, res) => {
-  try {
-    const projects = await Project.find()
-      .populate('assignedUsers', 'name compId') // Populate user details including name and compId
-      .populate('createdBy', 'username'); // Adjust the fields to populate as necessary
-
-    res.status(200).json({ projects });
-  } catch (error) {
-    console.error('Error retrieving projects:', error);
-    res.status(500).json({ message: 'Server error in getProjects' });
   }
 };

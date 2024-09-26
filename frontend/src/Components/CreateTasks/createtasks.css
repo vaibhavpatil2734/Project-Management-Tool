@@ -1,0 +1,99 @@
+body {
+    font-family: 'Arial', sans-serif; /* Modern, clean font */
+    background-color: #e0e7ff; /* Soft blue background for the whole page */
+    color: #1e3a8a; /* Dark blue text color for better readability */
+}
+
+.create-tasks-container {
+    max-width: 600px; /* Set a max width for the container */
+    margin: 50px auto; /* Center the container with top margin */
+    padding: 20px; /* Add some padding */
+    background-color: #ffffff; /* White background for the container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border: 1px solid #d1d5db; /* Light border for subtle definition */
+}
+
+h1 {
+    text-align: center; /* Center the title */
+    font-size: 2.5rem; /* Larger title font size */
+    margin-bottom: 20px; /* Space below title */
+    color: #4f46e5; /* Vibrant purple for the title */
+    font-weight: 600; /* Slightly bolder weight for emphasis */
+}
+
+.task-card {
+    margin-bottom: 20px; /* Space between tasks */
+    padding: 15px; /* Add padding */
+    background-color: #f3f4f6; /* Light gray background for task card */
+    border-radius: 8px; /* Softer corners */
+    border: 1px solid #d1d5db; /* Subtle border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.task-input, .task-select, .task-textarea {
+    width: 100%; /* Full width for inputs */
+    padding: 12px; /* Add padding */
+    margin: 10px 0; /* Space between rows */
+    border: 1px solid #cbd5e1; /* Light border color */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f0f9ff; /* Light blue background */
+    font-size: 16px; /* Consistent font size */
+    color: #1e3a8a; /* Dark blue text color */
+    transition: border-color 0.2s; /* Smooth transition on focus */
+}
+
+.task-input:focus, .task-select:focus, .task-textarea:focus {
+    border-color: #4f46e5; /* Purple border on focus */
+    outline: none; /* Remove outline */
+}
+
+.task-textarea {
+    min-height: 100px; /* Minimum height for the textarea */
+}
+
+button {
+    padding: 12px 18px; /* Add padding to buttons */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    color: #ffffff; /* White text color */
+    background-color: #4f46e5; /* Vibrant purple button color */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-right: 10px; /* Space between buttons */
+    font-family: 'Arial', sans-serif; /* Consistent font style */
+    font-size: 16px; /* Consistent button font size */
+    transition: background-color 0.2s, transform 0.2s; /* Smooth transitions */
+}
+
+button:hover {
+    background-color: #4338ca; /* Darken button color on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.remove-task-btn {
+    background-color: #dc3545; /* Red color for remove button */
+}
+
+.remove-task-btn:hover {
+    background-color: #c82333; /* Darken on hover */
+}
+
+.add-task-btn, .submit-tasks-btn {
+    background-color: #28a745; /* Green color for add and submit buttons */
+}
+
+.add-task-btn:hover, .submit-tasks-btn:hover {
+    background-color: #218838; /* Darken on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .create-tasks-container {
+        padding: 15px; /* Less padding on smaller screens */
+    }
+
+    button {
+        width: 100%; /* Full width for buttons on smaller screens */
+        margin-bottom: 10px; /* Space between buttons */
+    }
+}
