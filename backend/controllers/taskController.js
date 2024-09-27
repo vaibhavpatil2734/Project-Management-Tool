@@ -26,7 +26,7 @@ exports.createTask = async (req, res) => {
       description,
       Priority,
       status,
-      assignedTo: compId, // Use the user's ObjectId here
+      assignedTo, // Use the user's ObjectId here
       projectTitle
     });
 
