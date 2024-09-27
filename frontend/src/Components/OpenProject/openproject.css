@@ -1,0 +1,27 @@
+.open-project-container {
+    max-width: 600px; /* Set a max width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add some padding */
+    border: 1px solid #ccc; /* Light gray border for the container */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .project-title-input {
+    border: 1px solid #007bff; /* Bootstrap primary color border */
+  }
+  
+  .open-project-button {
+    width: 100%; /* Full-width button */
+  }
+  
+  .error-message {
+    margin-top: 15px; /* Space above the error message */
+  }
+  
+  .project-details-card {
+    background-color: #fff; /* White background for project details */
+    border: 1px solid #ddd; /* Light border */
+  }
+  

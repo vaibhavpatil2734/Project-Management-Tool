@@ -17,15 +17,16 @@ const ProjectSchema = new mongoose.Schema({
   },
   assignedUsers: [
     {
-      type: mongoose.Schema.Types.ObjectId, 
-      ref: 'User'  // Array of references to User model
+      type: String, 
+      required: true,
+      trim: true  // Store compId as a string and trim whitespace
     }
-  ], // An array to store multiple user IDs who are assigned to this project
+  ], // An array to store multiple user compIds who are assigned to this project
   
   projectTitle: { 
-      type: String, 
-      trim: true  // Trim whitespace from the description
-    }
+    type: String, 
+    trim: true  // Trim whitespace from the project title
+  }
 
 });
 

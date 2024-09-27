@@ -5,7 +5,7 @@ const taskSchema = new mongoose.Schema({
   description: { type: String },
   Priority: { type: String, required: true },
   status: { type: String, required: true },
-  assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Should reference the User model
+  assignedTo: { type: String, required: true, trim: true },
   projectTitle: { type: String, required: true },
   // Include any other fields you need
 });

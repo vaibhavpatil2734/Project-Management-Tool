@@ -7,6 +7,6 @@ const verifyAdmin = require('../middleware/authMiddleware'); // Import the admin
 router.post('/createProjects', verifyAdmin, projectController.createProjects);
 
 // Route to get all projects, accessible by any user
-// router.get('/getProjects', projectController.getProjects);
+router.post('/openProject', projectController.openProject);
 
 module.exports = router;

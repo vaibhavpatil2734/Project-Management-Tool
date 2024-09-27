@@ -17,8 +17,8 @@ export default function Profile({ profiledata }) {
 
   // Logout handler
   const handleLogout = () => {
-    // Clear any authentication data (like tokens)
-    localStorage.removeItem('token');
+    // Clear all data from local storage
+    localStorage.clear(); // Clear all local storage data
     alert('Logged out successfully!');
     // Redirect or handle other logout logic
     window.location.href = '/login';

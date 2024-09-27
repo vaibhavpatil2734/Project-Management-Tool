@@ -6,6 +6,8 @@ import Login from '../../Auth/Login';
 import "./body.css";
 import Profile from '../../Profile/Profile';
 import CreateTasks from '../../CreateTasks/CreateTasks';
+import OpenProject from '../../OpenProject/OpenProject';
+import ViewTasks from '../../ViewTasks/ViewTasks';
 
 export default function Body() {
   const [profiledata, setProfiledata] = useState(null);
@@ -22,6 +24,8 @@ export default function Body() {
         <Route path="/CreateProject" element={<CreateProject />} />
         <Route path="/Profile" element={<Profile profiledata={profiledata} />} />
         <Route path="/CreateTasks" element={<CreateTasks/>} />
+        <Route path="/OpenProject" element={<OpenProject/>} />
+        <Route path="/ViewTasks" element={<ViewTasks/>} />
       </Routes>
     </div>
   );

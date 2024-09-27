@@ -1,0 +1,41 @@
+.task-container {
+    display: flex;
+    flex-direction: column; /* Stack tasks vertically */
+    gap: 10px; /* Space between task items */
+  }
+  
+  .task-item {
+    width: 100%; /* Full width for each task */
+    padding: 10px; /* Reduced padding for compact size */
+    border-radius: 5px;
+    color: black; /* Text color */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    display: flex; /* Flex for columns */
+    flex-direction: column; /* Column layout for the task */
+  }
+  
+  .task-columns {
+    display: flex; /* Flex container for columns */
+    justify-content: space-between; /* Evenly space columns */
+    align-items: center; /* Center items vertically */
+  }
+  
+  .task-column {
+    flex: 1; /* Each column takes equal space */
+    padding: 5px; /* Padding for columns */
+  }
+  
+  .task-details {
+    margin-top: 5px; /* Space above task details */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity */
+  }
+  
+  .task-item:hover {
+    transform: scale(1.02); /* Slightly enlarge the task on hover */
+  }
+  
+  .task-item:hover .task-details {
+    opacity: 1; /* Show details on hover */
+  }
+  

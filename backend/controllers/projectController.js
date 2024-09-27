@@ -23,35 +23,53 @@ exports.createProjects = async (req, res) => {
       return res.status(400).json({ message: 'Assigned users are required.' });
     }
 
-    try {
-      // Find users by their compId
-      const validUsers = await User.find({ compId: { $in: assignedUsers } });
+    // Find users by their compId
+    const validUsers = await User.find({ compId: { $in: assignedUsers } });
 
-      // Ensure that all provided compIds have matching users
-      if (validUsers.length !== assignedUsers.length) {
-        return res.status(400).json({ message: 'Some assigned users do not exist or are missing a compId.' });
-      }
-
-      // Extract ObjectId's from the valid users
-      const userIds = validUsers.map(user => user._id);
-
-      // Proceed with project creation
-      const newProject = new Project({
-        title: title.trim(),
-        description: description.trim(),
-        assignedUsers: userIds, // Use ObjectId's here
-      });
-
-      const savedProject = await newProject.save();
-      res.status(201).json({ project: savedProject });
-
-    } catch (error) {
-      console.error('Error finding users:', error);
-      return res.status(500).json({ message: 'Error finding users' });
+    // Ensure that all provided compIds have matching users
+    if (validUsers.length !== assignedUsers.length) {
+      return res.status(400).json({ message: 'Some assigned users do not exist or are missing a compId.' });
     }
+
+    // Proceed with project creation
+    const newProject = new Project({
+      title: title.trim(),
+      description: description.trim(),
+      assignedUsers: assignedUsers, // Store compIds directly
+    });
+
+    const savedProject = await newProject.save();
+    res.status(201).json({ project: savedProject });
 
   } catch (error) {
     console.error('Error creating project:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error while creating project', details: error.message });
+  }
+};
+
+// Open an existing project
+exports.openProject = async (req, res) => {
+  try {
+    const { title } = req.body; // Extract project title from the request body
+
+    // Validate title
+    if (!title) {
+      return res.status(400).json({ message: 'Project title is required.' });
+    }
+
+    // Find the project by title and populate assignedUsers
+    const project = await Project.findOne({ title: title.trim() })
+      .populate('assignedUsers'); // Assuming you want to get the user documents
+
+    if (!project) {
+      return res.status(404).json({ message: 'Project not found.' });
+    }
+
+    // Return the project details including assigned users
+    res.status(200).json({ project });
+
+  } catch (error) {
+    console.error('Error opening project:', error);
+    res.status(500).json({ message: 'Server error: Cannot open project', details: error.message });
   }
 };

@@ -26,7 +26,7 @@ exports.createTask = async (req, res) => {
       description,
       Priority,
       status,
-      assignedTo: user._id, // Use the user's ObjectId here
+      assignedTo: compId, // Use the user's ObjectId here
       projectTitle
     });
 
@@ -38,5 +38,30 @@ exports.createTask = async (req, res) => {
   } catch (error) {
     // Return error response in case of failure
     res.status(500).json({ error: 'Failed to create task', details: error.message });
+  }
+};
+
+// Get all tasks by project name
+exports.getTasks = async (req, res) => {
+  try {
+    const { projectName } = req.body; // Extract project name from the request body
+
+    // Check if projectName is provided
+    if (!projectName) {
+      return res.status(400).json({ error: 'Project name is required.' });
+    }
+
+    // Find all tasks that belong to the specified project title
+    const tasks = await Task.find({ projectTitle: projectName });
+
+    if (tasks.length === 0) {
+      return res.status(404).json({ message: 'No tasks found for this project.' });
+    }
+
+    // Return success response with the list of tasks
+    res.status(200).json({ message: 'Tasks retrieved successfully', tasks });
+  } catch (error) {
+    // Return error response in case of failure
+    res.status(500).json({ error: 'Failed to retrieve tasks', details: error.message });
   }
 };
