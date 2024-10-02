@@ -3,12 +3,12 @@ import './createtasks.css'; // Import the CSS file for styling
 
 export default function CreateTasks() {
   const initialTask = {
-    title: '',
+    Tasktitle: '',
     description: '',
     Priority: 'Low', // Default value for Priority
     status: 'Pending', // Default value for Status
     assignedTo: '',
-    projectTitle: '' // This can be set dynamically
+    title: '' // This is equivalent to projectTitle
   };
 
   const [tasks, setTasks] = useState([initialTask]);
@@ -38,7 +38,7 @@ export default function CreateTasks() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const isCurrentTaskValid = tasks[currentTaskIndex].title && tasks[currentTaskIndex].projectTitle; // Simple validation for required fields
+    const isCurrentTaskValid = tasks[currentTaskIndex].Tasktitle && tasks[currentTaskIndex].title; // Validate Tasktitle and Project Title
 
     if (!isCurrentTaskValid) {
       alert('Please fill all required fields for the current task.');
@@ -46,11 +46,10 @@ export default function CreateTasks() {
     }
 
     try {
-      const projectTitle = localStorage.getItem('title'); // Get the project title from localStorage
       const token = localStorage.getItem('token'); // Get the auth token from localStorage
 
-      if (!projectTitle || !token) {
-        alert('Project title or token is missing. Please log in again frontend.');
+      if (!token) {
+        alert('Token is missing. Please log in again.');
         return;
       }
 
@@ -60,22 +59,16 @@ export default function CreateTasks() {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`, // Send the token in Authorization header
-              'Project-Title': projectTitle // Send the project title in the header
+              'Authorization': `Bearer ${token}` // Send the token in Authorization header
             },
             body: JSON.stringify(task),
           });
         })
       );
-      const data = await Promise.all(responses.map((res) => res.json()));
-      console.log('Tasks created successfully:', data);
 
       // Update the created task titles state
-      const titles = tasks.map((task) => task.title);
-      setCreatedTaskTitles(titles); // Store the titles of created tasks
-
-      // Show an alert indicating successful task creation
-      alert('Tasks created successfully!');
+      const taskTitles = tasks.map((task) => task.Tasktitle); // Use Tasktitle instead of title
+      setCreatedTaskTitles(taskTitles);
     } catch (error) {
       console.error('Error creating tasks:', error);
       alert('Failed to create tasks. Please try again.');
@@ -92,8 +85,8 @@ export default function CreateTasks() {
             <div className="task-input-row">
               <input
                 type="text"
-                name="title"
-                value={tasks[currentTaskIndex].title}
+                name="Tasktitle"
+                value={tasks[currentTaskIndex].Tasktitle}
                 onChange={(e) => handleChange(currentTaskIndex, e)}
                 placeholder="Task Title *"
                 required
@@ -148,8 +141,8 @@ export default function CreateTasks() {
             <div className="task-input-row">
               <input
                 type="text"
-                name="projectTitle"
-                value={tasks[currentTaskIndex].projectTitle}
+                name="title"
+                value={tasks[currentTaskIndex].title}
                 onChange={(e) => handleChange(currentTaskIndex, e)}
                 placeholder="Project Title *"
                 required
@@ -171,8 +164,8 @@ export default function CreateTasks() {
       <div className="recent-tasks">
         <h2>Recently Created Tasks:</h2>
         <ul>
-          {createdTaskTitles.map((title, index) => (
-            <li key={index}>{title}</li>
+          {createdTaskTitles.map((Tasktitle, index) => (
+            <li key={index}>{Tasktitle}</li>
           ))}
         </ul>
       </div>

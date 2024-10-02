@@ -14,7 +14,6 @@ const verifyProjectMembership = async (req, res, next) => {
   try {
     // Verify the token and extract the user data
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Decoded token:', decoded); // Log the decoded token for debugging
     req.user = decoded; // Attach the user (decoded token) to req object
 
     const { compId } = decoded; // Extract compId from the token payload

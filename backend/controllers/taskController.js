@@ -6,38 +6,28 @@ const User = require('../models/User'); // Ensure the User model is imported
 // Create a new task
 exports.createTask = async (req, res) => {
   try {
-    const { title, description, Priority, status, assignedTo } = req.body; // Extract task details from the request body
-    const { compId } = req.user; // Extract compId from the decoded token (added in verifyProjectMembership middleware)
-    const projectTitle = req.header('Project-Title'); // Retrieve the project title from the request headers
+    const { Tasktitle, description, Priority, status, assignedTo, title } = req.body; // Extract task details including projectTitle from the request body
 
     // Check if the required fields are provided
-    if (!title || !projectTitle) {
+    if (!Tasktitle || !title) {
       return res.status(400).json({ message: 'Title and Project Title are required.' });
     }
 
     // Find the project based on the project title
-    const project = await Project.findOne({ title: projectTitle });
+    const project = await Project.findOne({ title: title });
 
     if (!project) {
       return res.status(404).json({ message: 'Project not found.' });
     }
 
-    // Ensure the compId is part of the project's members (already checked in middleware, but for safety)
-    const isMember = project.members.some(member => member.compId === compId);
-
-    if (!isMember) {
-      return res.status(403).json({ message: 'You are not authorized to create tasks for this project.' });
-    }
-
     // Create a new task
     const newTask = new Task({
-      title,
+      Tasktitle,
       description,
       Priority,
       status,
       assignedTo,
-      projectTitle: project.title, // Associate the task with the project
-      createdBy: compId // Track who created the task
+      title// Track who created the task
     });
 
     // Save the task to the database
@@ -52,17 +42,24 @@ exports.createTask = async (req, res) => {
 };
 
 // Get all tasks by project name
+// Get all tasks by project title
 exports.getTasks = async (req, res) => {
   try {
-    const { projectName } = req.body; // Extract project name from the request body
+    const { title } = req.body; // Extract project title from the request body
 
-    // Check if projectName is provided
-    if (!projectName) {
-      return res.status(400).json({ error: 'Project name is required.' });
+    // Check if title is provided
+    if (!title) {
+      return res.status(400).json({ error: 'Project title is required.' });
     }
 
     // Find all tasks that belong to the specified project title
-    const tasks = await Task.find({ projectTitle: projectName });
+    const project = await Project.findOne({ title });
+
+    if (!project) {
+      return res.status(404).json({ message: 'Project not found.' });
+    }
+
+    const tasks = await Task.find({ title: project.title });
 
     if (tasks.length === 0) {
       return res.status(404).json({ message: 'No tasks found for this project.' });
@@ -75,3 +72,4 @@ exports.getTasks = async (req, res) => {
     res.status(500).json({ error: 'Failed to retrieve tasks', details: error.message });
   }
 };
+

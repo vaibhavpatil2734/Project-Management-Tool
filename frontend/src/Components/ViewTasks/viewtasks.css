@@ -1,41 +1,100 @@
+/* General styles for the view */
+.view-tasks {
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Task container styling */
 .task-container {
-    display: flex;
-    flex-direction: column; /* Stack tasks vertically */
-    gap: 10px; /* Space between task items */
-  }
-  
-  .task-item {
-    width: 100%; /* Full width for each task */
-    padding: 10px; /* Reduced padding for compact size */
-    border-radius: 5px;
-    color: black; /* Text color */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
-    display: flex; /* Flex for columns */
-    flex-direction: column; /* Column layout for the task */
-  }
-  
-  .task-columns {
-    display: flex; /* Flex container for columns */
-    justify-content: space-between; /* Evenly space columns */
-    align-items: center; /* Center items vertically */
-  }
-  
-  .task-column {
-    flex: 1; /* Each column takes equal space */
-    padding: 5px; /* Padding for columns */
-  }
-  
-  .task-details {
-    margin-top: 5px; /* Space above task details */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.3s ease; /* Smooth transition for opacity */
-  }
-  
-  .task-item:hover {
-    transform: scale(1.02); /* Slightly enlarge the task on hover */
-  }
-  
-  .task-item:hover .task-details {
-    opacity: 1; /* Show details on hover */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.task-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Task details hidden by default */
+.task-details {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+/* Show task details on hover */
+.task-item:hover .task-details {
+  max-height: 100px;
+  opacity: 1;
+}
+
+/* Task columns layout for the first row */
+.task-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.task-column {
+  font-size: 16px;
+}
+
+.edit-icon {
+  text-align: right;
+}
+
+/* Edit button with pencil icon */
+.edit-btn {
+  background-color: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.edit-btn:hover {
+  color: #555;
+}
+
+/* Priority Colors */
+.priority-high {
+  background-color: #ff6f61;
+}
+
+.priority-medium {
+  background-color: #ffa726;
+}
+
+.priority-low {
+  background-color: #66bb6a;
+}
+
+/* Styling error message */
+.error {
+  color: red;
+  text-align: center;
+}
+
+/* Smooth transitions for hover animations */
+.transition {
+  transition: all 1.1s ease-in-out;
+}
