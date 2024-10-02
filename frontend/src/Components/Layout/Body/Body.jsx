@@ -8,6 +8,7 @@ import Profile from '../../Profile/Profile';
 import CreateTasks from '../../CreateTasks/CreateTasks';
 import OpenProject from '../../OpenProject/OpenProject';
 import ViewTasks from '../../ViewTasks/ViewTasks';
+import UpdateTask from '../../UpdateTask/UpdateTask';
 
 export default function Body() {
   const [profiledata, setProfiledata] = useState(null);
@@ -26,6 +27,7 @@ export default function Body() {
         <Route path="/CreateTasks" element={<CreateTasks/>} />
         <Route path="/OpenProject" element={<OpenProject/>} />
         <Route path="/ViewTasks" element={<ViewTasks/>} />
+        <Route path="/update-task/:id" element={<UpdateTask/>} />
       </Routes>
     </div>
   );

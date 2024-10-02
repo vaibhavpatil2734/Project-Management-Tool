@@ -27,7 +27,7 @@ exports.createTask = async (req, res) => {
       Priority,
       status,
       assignedTo,
-      title// Track who created the task
+      title // Track who created the task
     });
 
     // Save the task to the database
@@ -41,7 +41,6 @@ exports.createTask = async (req, res) => {
   }
 };
 
-// Get all tasks by project name
 // Get all tasks by project title
 exports.getTasks = async (req, res) => {
   try {
@@ -73,3 +72,23 @@ exports.getTasks = async (req, res) => {
   }
 };
 
+// Update an existing task by ID
+
+exports.updateTask = async (req, res) => {
+  try {
+    const { id } = req.params; // Get the task ID from the URL
+    const updatedFields = req.body; // Get the fields to update from the request body
+
+    // Find the task by ID and update only the provided fields
+    const updatedTask = await Task.findByIdAndUpdate(id, { $set: updatedFields }, { new: true });
+
+    if (!updatedTask) {
+      return res.status(404).json({ message: 'Task not found' });
+    }
+
+    res.status(200).json({ message: 'Task updated successfully', task: updatedTask });
+  } catch (err) {
+    console.error('Error updating task:', err);
+    res.status(500).json({ message: 'Failed to update task' });
+  }
+};

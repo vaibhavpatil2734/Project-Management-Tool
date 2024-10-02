@@ -1,12 +1,14 @@
 /* General styles for the view */
 .view-tasks {
   padding: 20px;
+  background-color: #121212; /* Dark background */
+  color: #eee; /* Light text for contrast */
 }
 
 h1 {
   text-align: center;
   font-size: 24px;
-  color: #333;
+  color: #ccc; /* Slightly darker header color */
   margin-bottom: 20px;
 }
 
@@ -18,19 +20,20 @@ h1 {
 }
 
 .task-item {
-  background-color: #fff;
+  background-color: #1e1e1e; /* Dark background for task cards */
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   padding: 15px;
   position: relative;
   transition: all 0.3s ease;
   cursor: pointer;
   overflow: hidden;
+  color: #fff;
 }
 
 .task-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Task details hidden by default */
@@ -49,7 +52,7 @@ h1 {
 /* Task columns layout for the first row */
 .task-columns {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
   gap: 10px;
   margin-bottom: 5px;
 }
@@ -58,8 +61,8 @@ h1 {
   font-size: 16px;
 }
 
-.edit-icon {
-  text-align: right;
+.priority-column {
+  font-weight: bold;
 }
 
 /* Edit button with pencil icon */
@@ -72,20 +75,20 @@ h1 {
 }
 
 .edit-btn:hover {
-  color: #555;
+  color: #aaa;
 }
 
-/* Priority Colors */
+/* Priority Colors - Dark shades */
 .priority-high {
-  background-color: #ff6f61;
+  background-color: #8b0000; /* Dark red for high priority */
 }
 
 .priority-medium {
-  background-color: #ffa726;
+  background-color: #b8860b; /* Dark goldenrod for medium priority */
 }
 
 .priority-low {
-  background-color: #66bb6a;
+  background-color: #2e8b57; /* Dark sea green for low priority */
 }
 
 /* Styling error message */
