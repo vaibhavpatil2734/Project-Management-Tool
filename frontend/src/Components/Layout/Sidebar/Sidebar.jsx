@@ -22,6 +22,10 @@ export default function Sidebar() {
     navigate("/ViewTasks");
   };
 
+  const handleNavigateToChat = () => {
+    navigate("/Chat");
+  }
+
   useEffect(() => {
     const projectData = localStorage.getItem('projectData');
     if (projectData) {
@@ -53,7 +57,7 @@ export default function Sidebar() {
       <div className="card menu-card">
         <ul className="sidebar-menu">
           <li><a className="menu-link" onClick={handleNavigateToViewTask}>View Tasks</a></li>
-          <li><a className="menu-link" href="#services">Services</a></li>
+          <li><a className="menu-link" onClick={handleNavigateToChat}>Chat Room</a></li>
           <li><a className="menu-link" href="#about">About</a></li>
           <li><a className="menu-link" href="#contact">Contact</a></li>
         </ul>
