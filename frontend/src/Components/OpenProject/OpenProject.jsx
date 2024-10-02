@@ -24,12 +24,18 @@ export default function OpenProject() {
     }
 
     setError('');
+    const token = localStorage.getItem('token');
 
+    if (!token) {
+      alert('No authentication token found. Please log in.');
+      return;
+    }
     try {
       const response = await fetch('http://localhost:5000/api/projects/openProject', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ title }),
       });

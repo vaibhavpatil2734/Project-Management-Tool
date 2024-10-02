@@ -51,12 +51,14 @@ exports.login = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ msg: 'Invalid credentials' });
     }
+    console.log('User compId:', user.compId);
 
     const payload = {
-      id: user.id,
       name: user.name,
+      compId:user.compId,
       email: user.email,
       role: user.role,
+      
     };
     
 

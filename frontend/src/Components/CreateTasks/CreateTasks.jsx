@@ -8,7 +8,7 @@ export default function CreateTasks() {
     Priority: 'Low', // Default value for Priority
     status: 'Pending', // Default value for Status
     assignedTo: '',
-    projectTitle: ''
+    projectTitle: '' // This can be set dynamically
   };
 
   const [tasks, setTasks] = useState([initialTask]);
@@ -18,7 +18,7 @@ export default function CreateTasks() {
   const handleChange = (index, event) => {
     const { name, value } = event.target;
     const newTasks = [...tasks];
-    newTasks[index][name] = value; 
+    newTasks[index][name] = value;
     setTasks(newTasks);
   };
 
@@ -41,34 +41,44 @@ export default function CreateTasks() {
     const isCurrentTaskValid = tasks[currentTaskIndex].title && tasks[currentTaskIndex].projectTitle; // Simple validation for required fields
 
     if (!isCurrentTaskValid) {
-      alert("Please fill all required fields for the current task.");
+      alert('Please fill all required fields for the current task.');
       return;
     }
 
     try {
+      const projectTitle = localStorage.getItem('title'); // Get the project title from localStorage
+      const token = localStorage.getItem('token'); // Get the auth token from localStorage
+
+      if (!projectTitle || !token) {
+        alert('Project title or token is missing. Please log in again frontend.');
+        return;
+      }
+
       const responses = await Promise.all(
-        tasks.map(task => {
-          return fetch('http://localhost:5000/api/tasks/createTask', { 
+        tasks.map((task) => {
+          return fetch('http://localhost:5000/api/tasks/createTask', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`, // Send the token in Authorization header
+              'Project-Title': projectTitle // Send the project title in the header
             },
             body: JSON.stringify(task),
           });
         })
       );
-      const data = await Promise.all(responses.map(res => res.json()));
+      const data = await Promise.all(responses.map((res) => res.json()));
       console.log('Tasks created successfully:', data);
 
       // Update the created task titles state
-      const titles = tasks.map(task => task.title);
+      const titles = tasks.map((task) => task.title);
       setCreatedTaskTitles(titles); // Store the titles of created tasks
 
       // Show an alert indicating successful task creation
-      alert('Tasks created successfully!'); // Task created alert
+      alert('Tasks created successfully!');
     } catch (error) {
       console.error('Error creating tasks:', error);
-      alert('Failed to create tasks. Please try again.'); // Error alert
+      alert('Failed to create tasks. Please try again.');
     }
   };
 
@@ -79,7 +89,6 @@ export default function CreateTasks() {
         {tasks.length > 0 && (
           <div className="task-card">
             <h3>Task {currentTaskIndex + 1}</h3>
-            {/* Single field per row */}
             <div className="task-input-row">
               <input
                 type="text"
@@ -147,11 +156,17 @@ export default function CreateTasks() {
                 className="task-input"
               />
             </div>
-            <button type="button" className="remove-task-btn" onClick={() => handleRemoveTask(currentTaskIndex)}>Remove Task</button>
+            <button type="button" className="remove-task-btn" onClick={() => handleRemoveTask(currentTaskIndex)}>
+              Remove Task
+            </button>
           </div>
         )}
-        <button type="button" className="add-task-btn" onClick={handleAddTask}>Add Another Task</button>
-        <button type="submit" className="submit-tasks-btn">Create Tasks</button>
+        <button type="button" className="add-task-btn" onClick={handleAddTask}>
+          Add Another Task
+        </button>
+        <button type="submit" className="submit-tasks-btn">
+          Create Tasks
+        </button>
       </form>
       <div className="recent-tasks">
         <h2>Recently Created Tasks:</h2>

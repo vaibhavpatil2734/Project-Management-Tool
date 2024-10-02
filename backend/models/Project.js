@@ -23,11 +23,6 @@ const ProjectSchema = new mongoose.Schema({
     }
   ], // An array to store multiple user compIds who are assigned to this project
   
-  projectTitle: { 
-    type: String, 
-    trim: true  // Trim whitespace from the project title
-  }
-
 });
 
 // Create and export the Project model
