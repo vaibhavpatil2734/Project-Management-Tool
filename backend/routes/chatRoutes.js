@@ -5,6 +5,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
 
 // POST route for sending chat messages
-router.post('/sendChatMessage', authMiddleware, sendChatMessage);
-router.post('/fetchChatMessages', fetchChatMessages);
+router.post('/sendChatMessage', verifyProjectMembership,sendChatMessage);
+router.post('/fetchChatMessages',verifyProjectMembership, fetchChatMessages);
 module.exports = router;

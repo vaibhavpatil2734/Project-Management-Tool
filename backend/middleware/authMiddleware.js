@@ -11,14 +11,13 @@ const verifyAdmin = (req, res, next) => {
   const token = authHeader.split(' ')[1]; // Extract the token from 'Bearer <token>'
 
   try {
-    // Verify the token using the secret key from environment variables
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Attach the decoded token payload (user data) to the request object for later use
     req.user = decoded;
 
     // Log the decoded token for debugging purposes (optional)
-    console.log('Decoded token:', decoded);
+    console.log('Decoded token authmiddl:', decoded);
 
     // Check if the user's role is 'admin'
     if (decoded.role !== 'admin') {

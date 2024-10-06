@@ -2,16 +2,16 @@ const Chat = require('../models/Chat'); // Adjust the path as necessary
 
 // Send a chat message
 const sendChatMessage = async (req, res) => {
-    const { message, projectName } = req.body; // Project name and message from request body
+    const { message, title } = req.body; // Title (previously projectName) and message from request body
     const { name } = req.user; // Username from the token
 
-    // Validate message and projectName
+    // Validate message and title
     if (!message || typeof message !== 'string' || !message.trim()) {
         return res.status(400).json({ error: 'Message content is required.' });
     }
 
-    if (!projectName || typeof projectName !== 'string' || !projectName.trim()) {
-        return res.status(400).json({ error: 'Project name is required.' });
+    if (!title || typeof title !== 'string' || !title.trim()) {
+        return res.status(400).json({ error: 'Title (project name) is required.' });
     }
 
     try {
@@ -19,7 +19,7 @@ const sendChatMessage = async (req, res) => {
         const chat = new Chat({
             senderName: name, // Extracted from token
             message: message.trim(),
-            title: projectName.trim() // Project name from the request body
+            title: title.trim() // Title from the request body
         });
 
         // Save the chat message
@@ -31,19 +31,18 @@ const sendChatMessage = async (req, res) => {
     }
 };
 
-
-// Fetch chat messages by project name with pagination
+// Fetch chat messages by title with pagination
 const fetchChatMessages = async (req, res) => {
-    const { projectName } = req.body; // Get projectName from request body
+    const { title } = req.body; // Get title (previously projectName) from request body
 
-    // Validate projectName
-    if (!projectName || !projectName.trim()) {
-        return res.status(400).json({ error: 'Project name is required.' });
+    // Validate title
+    if (!title || !title.trim()) {
+        return res.status(400).json({ error: 'Title (project name) is required.' });
     }
 
     try {
-        // Fetch all messages by project name without pagination
-        const messages = await Chat.find({ title: projectName })
+        // Fetch all messages by title without pagination
+        const messages = await Chat.find({ title })
                             .sort({ createdAt: 1 }) // Sort by oldest first, so latest appears last
                             .exec();
 

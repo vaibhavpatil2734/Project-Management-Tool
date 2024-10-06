@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion'; // Install framer-motion using `npm install framer-motion`
+import './chat.css'; // Import the CSS file
 
 export default function Chat() {
     const [messages, setMessages] = useState([]); // State for storing chat messages
     const [messageInput, setMessageInput] = useState(''); // State for the input field
     const [projectTitle, setProjectTitle] = useState(''); // State for the project title
     const token = localStorage.getItem('token'); // Retrieve JWT token from local storage
+    const currentUser = "YourUsername"; // Set this dynamically based on your logged-in user
 
     const fetchMessages = async () => {
         try {
@@ -13,19 +16,16 @@ export default function Chat() {
                 return;
             }
 
-            console.log('Fetching messages for project:', projectTitle); // Log the project title being fetched
-
             const response = await fetch('http://localhost:5000/api/connect/fetchChatMessages', {
-                method: 'POST', // Changed to POST for sending project name
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify({ projectName: projectTitle }) // Send the project name
+                body: JSON.stringify({ title: projectTitle })
             });
 
             const data = await response.json();
-
             if (response.ok) {
                 setMessages(data.messages); // Set the messages from the response
             } else {
@@ -37,23 +37,20 @@ export default function Chat() {
     };
 
     useEffect(() => {
-        // Retrieve the project title from local storage
         const projectData = localStorage.getItem('projectData');
         if (projectData) {
             const parsedData = JSON.parse(projectData);
             setProjectTitle(parsedData.title); // Set the project title
-            console.log('Project Title Retrieved:', parsedData.title); // Log the project title
         } else {
             console.error('No project data found in local storage.');
         }
-    }, []); // This will run only once on component mount
+    }, []);
 
-    // Separate useEffect for fetching messages based on projectTitle
     useEffect(() => {
         if (projectTitle) {
             fetchMessages(); // Fetch messages only if the project title is available
         }
-    }, [projectTitle]); // Fetch messages when project title changes
+    }, [projectTitle]);
 
     const handleSendMessage = async () => {
         if (!messageInput) {
@@ -68,12 +65,11 @@ export default function Chat() {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify({ message: messageInput, projectName: projectTitle })
+                body: JSON.stringify({ message: messageInput, title: projectTitle })
             });
 
             const data = await response.json();
             if (response.ok) {
-                // Update the messages state to include the new message
                 setMessages((prevMessages) => [...prevMessages, data]);
                 setMessageInput(''); // Clear the input field after sending
             } else {
@@ -85,23 +81,42 @@ export default function Chat() {
     };
 
     return (
-        <div>
-            <h2>Chat Room - {projectTitle || 'Loading...'}</h2>
-            <div className="chat-window" style={{ border: '1px solid #ccc', padding: '10px', height: '300px', overflowY: 'scroll' }}>
+        <div className="chat-container">
+            <h2 className="chat-title">Chat Room - {projectTitle || 'Loading...'}</h2>
+            
+            {/* Chat window */}
+            <motion.div
+                className="chat-window"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+            >
                 {messages.map((msg, index) => (
-                    <div key={index} style={{ margin: '5px 0' }}>
-                        <strong>{msg.senderName}:</strong> {msg.message}
-                    </div>
+                    <motion.div
+                        key={index}
+                        className={`chat-bubble ${msg.senderName === currentUser ? 'mine' : 'theirs'}`} // Adjust sender styling
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <strong>{msg.senderName === currentUser ? 'You' : msg.senderName}:</strong> {msg.message}
+                    </motion.div>
                 ))}
+            </motion.div>
+
+            {/* Input area */}
+            <div className="input-container">
+                <input
+                    type="text"
+                    value={messageInput}
+                    onChange={(e) => setMessageInput(e.target.value)}
+                    placeholder="Type your message..."
+                    className="chat-input"
+                />
+                <button onClick={handleSendMessage} className="send-button">
+                    Send
+                </button>
             </div>
-            <input
-                type="text"
-                value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
-                placeholder="Type your message"
-                style={{ width: '70%', marginRight: '10px' }}
-            />
-            <button onClick={handleSendMessage}>Send</button>
         </div>
     );
 }
