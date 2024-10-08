@@ -9,6 +9,7 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     border: 2px solid #007bff; /* Border color */
     color: #ff6868; /* Set default text color to white for visibility */
+    transition: background 0.4s ease;
 }
 
 .calendar-header {
@@ -40,38 +41,39 @@
 }
 
 .calendar-day {
-    padding: 20px;
+    padding: 15px;
     border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for days */
     position: relative;
     cursor: pointer;
-    min-height: 120px; /* Increased height for modern look */
+    min-height: 100px; /* Standardized height */
     border-radius: 10px;
-    transition: transform 0.2s, box-shadow 0.2s; /* Added box-shadow transition */
-    display: flex; /* Flex to center text */
-    flex-direction: column; /* Allow for proper alignment of items */
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.4s; /* Added box-shadow transition */
+    display: flex;
+    flex-direction: column;
     justify-content: center; /* Center the content vertically */
     align-items: center; /* Center the content horizontally */
-    color: #4bb5d0; /* Ensure the text color is white */
+    color: #ffffff; /* Ensure the text color is white */
     background-color: #4e73df; /* Main color for calendar days */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add text shadow for better visibility */
 }
 
 .calendar-day:hover {
-    transform: scale(1.05); /* Scale effect on hover */
-    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.5); /* Add shadow on hover */
+    transform: scale(1.08); /* Slightly larger scale on hover */
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5); /* Add shadow on hover */
     background-color: #5b8ef1; /* Lighten background on hover */
 }
 
 .calendar-day.selected {
     background-color: #007bff; /* Selected day color */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Shadow effect for selected day */
 }
 
 .not-current-month {
-    opacity: 0.5; /* Dimming for days not in the current month */
+    opacity: 0.4; /* More prominent dimming for days not in the current month */
 }
 
 .day-number {
-    font-size: 28px; /* Increased font size */
+    font-size: 26px; /* Balanced font size */
     font-weight: bold;
     color: #ffffff; /* White text for better contrast */
 }
@@ -83,7 +85,8 @@
     background-color: #f32400; /* Red background for event count */
     color: #fff;
     border-radius: 50%;
-    padding: 5px 10px;
+    padding: 5px 8px;
+    font-size: 12px;
 }
 
 .events {
@@ -97,13 +100,14 @@
     margin: 5px 0;
     padding: 10px;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     color: #ffffff; /* White text for better contrast */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add text shadow for better visibility */
 }
 
 .event:hover {
     background-color: rgba(0, 123, 255, 0.7); /* Blue hover effect for events */
+    transform: translateY(-3px); /* Lift effect on hover */
 }
 
 .event-input {
@@ -126,6 +130,7 @@
 
 .event-input input:focus {
     border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Soft focus effect */
 }
 
 .event-input button {
@@ -135,9 +140,10 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .event-input button:hover {
     background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
 }
