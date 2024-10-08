@@ -1,0 +1,196 @@
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import './mycalendar.css';
+import {
+    format,
+    addDays,
+    startOfMonth,
+    endOfMonth,
+    startOfWeek,
+    endOfWeek,
+    isSameMonth,
+    isSameDay,
+} from 'date-fns';
+
+export default function MyCalendar() {
+    const [events, setEvents] = useState([]); // State to store fetched events
+    const [selectedDate, setSelectedDate] = useState(null); // State for selected date
+    const [newEventDetail, setNewEventDetail] = useState(''); // State for new event input
+    const [displayMonth, setDisplayMonth] = useState(new Date()); // State for the current month
+    const token = localStorage.getItem('token');
+    const projectTitle = JSON.parse(localStorage.getItem('projectData')).title;
+
+    // Fetch calendar events from backend
+    const fetchEvents = async () => {
+        try {
+            const response = await fetch(
+                `http://localhost:5000/api/calendar/fetchCalendarEvents/${projectTitle}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            const data = await response.json();
+            if (response.ok) {
+                setEvents(data.events); // Expecting { events: [...] } from the backend
+            } else {
+                console.error('Failed to fetch events:', data.message);
+            }
+        } catch (error) {
+            console.error('Error fetching events:', error);
+        }
+    };
+
+    // Fetch events when the component mounts
+    useEffect(() => {
+        fetchEvents(); // Fetch events when component mounts or display month changes
+    }, [displayMonth]);
+
+    // Handle page visibility change to refetch events when the user navigates back to the page
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (!document.hidden) {
+                fetchEvents(); // Refetch events when the user comes back to the page
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, []);
+
+    // Create a new event
+    const createEvent = async () => {
+        if (!newEventDetail || !selectedDate) {
+            alert('Please provide an event detail and date.');
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:5000/api/calendar/createCalendarEvent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ title: projectTitle, eventDetail: newEventDetail, date: selectedDate }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                setEvents((prevEvents) => [...prevEvents, data]); // Assuming data contains the new event
+                setNewEventDetail(''); // Clear input after submission
+            } else {
+                console.error('Failed to create event:', data.message);
+            }
+        } catch (error) {
+            console.error('Error creating event:', error);
+        }
+    };
+
+    // Display a specific month on the calendar
+    const renderCalendar = () => {
+        const startMonth = startOfMonth(displayMonth);
+        const endMonth = endOfMonth(displayMonth);
+        const startDate = startOfWeek(startMonth);
+        const endDate = endOfWeek(endMonth);
+
+        const calendarDays = [];
+        let currentDay = startDate;
+
+        while (currentDay <= endDate) {
+            const formattedDate = format(currentDay, 'yyyy-MM-dd');
+            const dayEvents = events.filter((event) => format(new Date(event.date), 'yyyy-MM-dd') === formattedDate);
+            const isCurrentMonth = isSameMonth(currentDay, displayMonth);
+            const isSelectedDay = isSameDay(currentDay, selectedDate);
+
+            // Count events for the current day
+            const eventCount = dayEvents.length;
+
+            // Set color based on event count
+            const eventColors = ['#6a5acd', '#ff6347', '#3cb371', '#ffa500', '#00bfff', '#ff1493', '#ffd700'];
+            const eventColor = eventCount > 0 ? eventColors[eventCount % eventColors.length] : '#fff';
+
+            calendarDays.push(
+                <motion.div
+                    key={formattedDate}
+                    className={`calendar-day ${isCurrentMonth ? '' : 'not-current-month'} ${isSelectedDay ? 'selected' : ''}`}
+                    style={{ backgroundColor: eventColor }}
+                    onClick={() => setSelectedDate(formattedDate)} // Change the date on click
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <div className="day-number">{format(currentDay, 'd')}</div>
+                    {eventCount > 0 && <div className="event-count">{eventCount}</div>}
+                    <motion.div
+                        className="events"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{
+                            height: isSelectedDay ? 'auto' : 0,
+                            opacity: isSelectedDay ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        {dayEvents.map((event, idx) => (
+                            <motion.div
+                                key={idx}
+                                className="event"
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3, delay: idx * 0.1 }}
+                            >
+                                {event.eventDetail}
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </motion.div>
+            );
+            currentDay = addDays(currentDay, 1);
+        }
+
+        return calendarDays;
+    };
+
+    return (
+        <div className="calendar-container">
+            <h2>Calendar - {projectTitle}</h2>
+
+            {/* Calendar Header */}
+            <div className="calendar-header">
+                <button onClick={() => setDisplayMonth(addDays(displayMonth, -30))}>{'<'}</button>
+                <span>{format(displayMonth, 'MMMM yyyy')}</span>
+                <button onClick={() => setDisplayMonth(addDays(displayMonth, 30))}>{'>'}</button>
+            </div>
+
+            {/* Weekday Labels */}
+            <div className="weekday-labels">
+                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, idx) => (
+                    <div key={idx} className="weekday-label">{day}</div>
+                ))}
+            </div>
+
+            {/* Calendar Grid */}
+            <div className="calendar-grid">
+                {renderCalendar()}
+            </div>
+
+            {/* Event Input */}
+            {selectedDate && (
+                <motion.div className="event-input" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+                    <h3>Add Event on {format(new Date(selectedDate), 'MMMM dd, yyyy')}</h3>
+                    <input
+                        type="text"
+                        value={newEventDetail}
+                        onChange={(e) => setNewEventDetail(e.target.value)}
+                        placeholder="Enter event details..."
+                    />
+                    <button onClick={createEvent}>Save Event</button>
+                </motion.div>
+            )}
+        </div>
+    );
+}

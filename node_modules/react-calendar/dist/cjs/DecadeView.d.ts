@@ -1,0 +1,8 @@
+/// <reference types="react" />
+import Years from './DecadeView/Years.js';
+type DecadeViewProps = React.ComponentProps<typeof Years>;
+/**
+ * Displays a given decade.
+ */
+export default function DecadeView(props: DecadeViewProps): JSX.Element;
+export {};

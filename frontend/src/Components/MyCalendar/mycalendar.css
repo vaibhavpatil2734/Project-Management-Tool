@@ -1,0 +1,143 @@
+.calendar-container {
+    width: 100%;
+    max-width: 1000px; /* Increased width for a modern look */
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #2e6ba9, #c8e1ff); /* Gradient background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border: 2px solid #007bff; /* Border color */
+    color: #ff6868; /* Set default text color to white for visibility */
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #007bff; /* Header text color */
+}
+
+.weekday-labels {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: rgba(0, 0, 0, 0.2); /* Darker background for weekdays */
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
+.weekday-label {
+    text-align: center;
+    font-weight: bold;
+    color: #ffffff; /* White text for better contrast */
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+}
+
+.calendar-day {
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for days */
+    position: relative;
+    cursor: pointer;
+    min-height: 120px; /* Increased height for modern look */
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s; /* Added box-shadow transition */
+    display: flex; /* Flex to center text */
+    flex-direction: column; /* Allow for proper alignment of items */
+    justify-content: center; /* Center the content vertically */
+    align-items: center; /* Center the content horizontally */
+    color: #4bb5d0; /* Ensure the text color is white */
+    background-color: #4e73df; /* Main color for calendar days */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add text shadow for better visibility */
+}
+
+.calendar-day:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.5); /* Add shadow on hover */
+    background-color: #5b8ef1; /* Lighten background on hover */
+}
+
+.calendar-day.selected {
+    background-color: #007bff; /* Selected day color */
+}
+
+.not-current-month {
+    opacity: 0.5; /* Dimming for days not in the current month */
+}
+
+.day-number {
+    font-size: 28px; /* Increased font size */
+    font-weight: bold;
+    color: #ffffff; /* White text for better contrast */
+}
+
+.event-count {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #f32400; /* Red background for event count */
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px 10px;
+}
+
+.events {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.event {
+    background-color: rgba(0, 0, 0, 0.5); /* Darker background for events */
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    color: #ffffff; /* White text for better contrast */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add text shadow for better visibility */
+}
+
+.event:hover {
+    background-color: rgba(0, 123, 255, 0.7); /* Blue hover effect for events */
+}
+
+.event-input {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.2); /* Light background for input area */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.event-input input {
+    width: 70%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.event-input input:focus {
+    border-color: #007bff; /* Blue border on focus */
+}
+
+.event-input button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.event-input button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

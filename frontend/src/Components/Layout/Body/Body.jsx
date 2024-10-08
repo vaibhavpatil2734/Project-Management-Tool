@@ -10,6 +10,7 @@ import OpenProject from '../../OpenProject/OpenProject';
 import ViewTasks from '../../ViewTasks/ViewTasks';
 import UpdateTask from '../../UpdateTask/UpdateTask';
 import Chat from '../../Chat/Chat';
+import MyCalendar from '../../MyCalendar/MyCalendar';
 
 export default function Body() {
   const [profiledata, setProfiledata] = useState(null);
@@ -30,6 +31,7 @@ export default function Body() {
         <Route path="/ViewTasks" element={<ViewTasks/>} />
         <Route path="/update-task/:id" element={<UpdateTask/>} />
         <Route path="/Chat" element={<Chat/>} />
+        <Route path="/MyCalendar" element={<MyCalendar/>} />
       </Routes>
     </div>
   );

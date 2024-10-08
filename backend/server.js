@@ -8,6 +8,7 @@ const taskRoutes = require('./routes/taskRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const errorHandler = require('./middleware/errorHandler');
 const chatRoutes = require('./routes/chatRoutes');
+const calendarRoutes = require('./routes/calendarRoutes');
 require('dotenv').config(); // Load environment variables
 
 const app = express();
@@ -29,6 +30,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/connect', chatRoutes);
+app.use('/api/calendar', calendarRoutes)
 
 // Error handling middleware
 app.use(errorHandler);
