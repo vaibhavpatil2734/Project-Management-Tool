@@ -1,15 +1,19 @@
 .calendar-container {
     width: 100%;
-    max-width: 1000px; /* Increased width for a modern look */
+    max-width: 1200px; /* Increased width for larger screens */
     margin: 0 auto;
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #2e6ba9, #c8e1ff); /* Gradient background */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    border: 2px solid #007bff; /* Border color */
-    color: #ff6868; /* Set default text color to white for visibility */
-    transition: background 0.4s ease;
+    background: linear-gradient(135deg, #1c4b88, #b0d4f1); /* Enhanced gradient background */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Increased shadow for more depth */
+    border: 2px solid #0056b3; /* Slightly darker border */
+    color: #ffffff; /* Set default text color */
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.calendar-container:hover {
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4); /* Larger shadow on hover */
 }
 
 .calendar-header {
@@ -17,111 +21,118 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    color: #007bff; /* Header text color */
+    color: #ffffff; /* White text for header */
+    font-size: 24px; /* Larger font size for the header */
+    font-weight: bold;
+    text-transform: uppercase; /* Make header text all caps */
 }
 
 .weekday-labels {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    background-color: rgba(0, 0, 0, 0.2); /* Darker background for weekdays */
-    padding: 10px 0;
-    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3); /* Darker background for weekdays */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow to the labels */
 }
 
 .weekday-label {
     text-align: center;
     font-weight: bold;
-    color: #ffffff; /* White text for better contrast */
+    color: #f5f5f5; /* Softer white for better readability */
+    font-size: 18px;
 }
 
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
+    gap: 10px; /* Increased gap for cleaner layout */
 }
 
 .calendar-day {
-    padding: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for days */
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
     cursor: pointer;
-    min-height: 100px; /* Standardized height */
-    border-radius: 10px;
-    transition: transform 0.2s, box-shadow 0.2s, background-color 0.4s; /* Added box-shadow transition */
+    min-height: 120px; /* Increased height for better layout */
+    border-radius: 15px;
+    transition: transform 0.2s, box-shadow 0.3s, background-color 0.4s;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center the content vertically */
-    align-items: center; /* Center the content horizontally */
-    color: #ffffff; /* Ensure the text color is white */
-    background-color: #4e73df; /* Main color for calendar days */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add text shadow for better visibility */
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    background-color: #4668c2; /* More vibrant color for calendar days */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Deeper text shadow */
 }
 
 .calendar-day:hover {
-    transform: scale(1.08); /* Slightly larger scale on hover */
-    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5); /* Add shadow on hover */
-    background-color: #5b8ef1; /* Lighten background on hover */
+    transform: scale(1.1); /* Slightly larger scale on hover */
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6); /* Larger shadow on hover */
+    background-color: #577dd6; /* Lighten background on hover */
 }
 
 .calendar-day.selected {
-    background-color: #007bff; /* Selected day color */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Shadow effect for selected day */
+    background-color: #0056b3; /* Darker color for selected day */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
 }
 
 .not-current-month {
-    opacity: 0.4; /* More prominent dimming for days not in the current month */
+    opacity: 0.3; /* Slightly more transparent for days not in current month */
 }
 
 .day-number {
-    font-size: 26px; /* Balanced font size */
+    font-size: 28px; /* Slightly larger font */
     font-weight: bold;
-    color: #ffffff; /* White text for better contrast */
+    color: #ffffff;
 }
 
 .event-count {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: #f32400; /* Red background for event count */
+    top: 10px;
+    right: 10px;
+    background-color: #e11d48; /* More vivid red for event count */
     color: #fff;
     border-radius: 50%;
-    padding: 5px 8px;
-    font-size: 12px;
+    padding: 5px 10px;
+    font-size: 14px; /* Slightly larger font */
 }
 
 .events {
-    margin-top: 10px;
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
+    align-items: center; /* Center events for a neater layout */
 }
 
 .event {
-    background-color: rgba(0, 0, 0, 0.5); /* Darker background for events */
+    background-color: rgba(0, 0, 0, 0.4);
     margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 12px;
+    border-radius: 8px;
     transition: background-color 0.3s, transform 0.3s;
-    color: #ffffff; /* White text for better contrast */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Add text shadow for better visibility */
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    width: 90%; /* Full width for a cleaner layout */
 }
 
 .event:hover {
-    background-color: rgba(0, 123, 255, 0.7); /* Blue hover effect for events */
-    transform: translateY(-3px); /* Lift effect on hover */
+    background-color: rgba(0, 123, 255, 0.8);
+    transform: translateY(-4px); /* More pronounced lift effect */
 }
 
 .event-input {
-    margin-top: 20px;
+    margin-top: 25px;
     padding: 15px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.2); /* Light background for input area */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s;
 }
 
 .event-input input {
-    width: 70%;
-    padding: 10px;
+    width: 75%;
+    padding: 12px;
     margin-right: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -129,13 +140,13 @@
 }
 
 .event-input input:focus {
-    border-color: #007bff; /* Blue border on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Soft focus effect */
+    border-color: #0056b3; /* Darker blue border on focus */
+    box-shadow: 0 0 7px rgba(0, 123, 255, 0.6);
 }
 
 .event-input button {
-    padding: 10px 20px;
-    background-color: #007bff;
+    padding: 12px 24px;
+    background-color: #0056b3;
     color: white;
     border: none;
     border-radius: 5px;
@@ -144,6 +155,26 @@
 }
 
 .event-input button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: translateY(-2px); /* Lift effect on hover */
+    background-color: #003e7e; /* Even darker blue on hover */
+    transform: translateY(-3px);
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    .calendar-grid {
+        grid-template-columns: repeat(4, 1fr); /* Adjust grid for smaller screens */
+    }
+    
+    .calendar-day {
+        min-height: 80px; /* Reduce height for smaller screens */
+        padding: 10px;
+    }
+
+    .day-number {
+        font-size: 22px; /* Smaller font on mobile */
+    }
+
+    .event-input input {
+        width: 60%; /* Adjust input width */
+    }
 }

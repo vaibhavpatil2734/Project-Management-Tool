@@ -15,9 +15,9 @@ import {
 
 export default function MyCalendar() {
     const [events, setEvents] = useState([]); // State to store fetched events
+    const [selectedDate, setSelectedDate] = useState(null); // State for selected date
     const [newEventDetail, setNewEventDetail] = useState(''); // State for new event input
     const [displayMonth, setDisplayMonth] = useState(new Date()); // State for the current month
-    const [expandedDays, setExpandedDays] = useState(new Set()); // Track expanded days
     const token = localStorage.getItem('token');
     const projectTitle = JSON.parse(localStorage.getItem('projectData')).title;
 
@@ -64,14 +64,8 @@ export default function MyCalendar() {
 
     // Create a new event
     const createEvent = async () => {
-        if (!newEventDetail) {
-            alert('Please provide event details.');
-            return;
-        }
-
-        const selectedDate = Array.from(expandedDays)[0]; // Get the currently selected date from expandedDays
-        if (!selectedDate) {
-            alert('Please select a date to add an event.');
+        if (!newEventDetail || !selectedDate) {
+            alert('Please provide event details and select a date.');
             return;
         }
 
@@ -89,26 +83,12 @@ export default function MyCalendar() {
             if (response.ok) {
                 setEvents((prevEvents) => [...prevEvents, data]); // Assuming data contains the new event
                 setNewEventDetail(''); // Clear input after submission
-                setExpandedDays(new Set()); // Clear expanded days after adding event
             } else {
                 console.error('Failed to create event:', data.message);
             }
         } catch (error) {
             console.error('Error creating event:', error);
         }
-    };
-
-    // Toggle expand/collapse for a specific day
-    const toggleExpandDay = (formattedDate) => {
-        setExpandedDays((prev) => {
-            const newExpandedDays = new Set(prev);
-            if (newExpandedDays.has(formattedDate)) {
-                newExpandedDays.delete(formattedDate); // Collapse if already expanded
-            } else {
-                newExpandedDays.add(formattedDate); // Expand if not already expanded
-            }
-            return newExpandedDays;
-        });
     };
 
     // Display the calendar grid
@@ -125,7 +105,7 @@ export default function MyCalendar() {
             const formattedDate = format(currentDay, 'yyyy-MM-dd');
             const dayEvents = events.filter((event) => format(new Date(event.date), 'yyyy-MM-dd') === formattedDate);
             const isCurrentMonth = isSameMonth(currentDay, displayMonth);
-            const isSelectedDay = expandedDays.has(formattedDate);
+            const isSelectedDay = isSameDay(currentDay, selectedDate);
 
             // Count events for the current day
             const eventCount = dayEvents.length;
@@ -139,7 +119,7 @@ export default function MyCalendar() {
                     key={formattedDate}
                     className={`calendar-day ${isCurrentMonth ? '' : 'not-current-month'} ${isSelectedDay ? 'selected' : ''}`}
                     style={{ backgroundColor: eventColor }}
-                    onClick={() => toggleExpandDay(formattedDate)} // Toggle expand on click
+                    onClick={() => setSelectedDate(formattedDate)} // Change the date on click
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                 >
@@ -198,9 +178,9 @@ export default function MyCalendar() {
             </div>
 
             {/* Event Input */}
-            {expandedDays.size > 0 && (
+            {selectedDate && (
                 <motion.div className="event-input" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                    <h3>Add Event on {format(new Date(Array.from(expandedDays)[0]), 'MMMM dd, yyyy')}</h3>
+                    <h3>Add Event on {format(new Date(selectedDate), 'MMMM dd, yyyy')}</h3>
                     <input
                         type="text"
                         value={newEventDetail}
