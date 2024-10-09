@@ -1,13 +1,10 @@
 const express = require('express');
-const { createCalendarEvent, fetchCalendarEvents } = require('../controllers/calendarController');
-const verifyProjectMembership = require('../middleware/verifyProjectMembership');
-const authMiddleware = require('../middleware/authMiddleware');
+const { createCalendarEvent, fetchCalendarEvents } = require('../controllers/CalendarController');
+
 const router = express.Router();
 
-// POST route for creating a calendar event
+// Define routes
 router.post('/createCalendarEvent', createCalendarEvent);
-
-// GET route for fetching calendar events
-router.get('/fetchCalendarEvents/:projectTitle', fetchCalendarEvents);
+router.post('/fetchCalendarEvents', fetchCalendarEvents); // Use POST method with body
 
 module.exports = router;

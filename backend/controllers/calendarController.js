@@ -2,7 +2,7 @@ const CalendarEvent = require('../models/Calendar'); // Adjust the path as neces
 
 // Create a new calendar event
 const createCalendarEvent = async (req, res) => {
-    const { eventDetail, date, title } = req.body; // Extract event details, date, and title (project name) from the request body
+    const { eventDetail, date, title } = req.body;
 
     // Validate input
     if (!eventDetail || typeof eventDetail !== 'string' || !eventDetail.trim()) {
@@ -18,38 +18,33 @@ const createCalendarEvent = async (req, res) => {
     }
 
     try {
-        // Create a new event
         const calendarEvent = new CalendarEvent({
             eventDetail: eventDetail.trim(),
-            date: new Date(date), // Ensure the date is a valid Date object
-            title: title.trim(), // Project title
+            date: new Date(date), 
+            title: title.trim(),
         });
 
-        // Save the event
         await calendarEvent.save();
-        res.status(201).json(calendarEvent); // Return the saved event
+        res.status(201).json(calendarEvent);
     } catch (error) {
         console.error('Error creating calendar event:', error);
         res.status(500).json({ error: 'Failed to create event' });
     }
 };
 
-// Fetch calendar events by project title
+// Fetch calendar events by project title (using req.body)
 const fetchCalendarEvents = async (req, res) => {
     const { title } = req.body; // Extract project title from request body
 
-    // Validate title
     if (!title || typeof title !== 'string' || !title.trim()) {
         return res.status(400).json({ error: 'Title (project name) is required.' });
     }
 
     try {
-        // Fetch all events by title without pagination
-        const events = await CalendarEvent.find({ title })
-                            .sort({ date: 1 }) // Sort by date, oldest to newest
+        const events = await CalendarEvent.find({ title: title.trim() })
+                            .sort({ date: 1 }) 
                             .exec();
 
-        // Return the events
         res.status(200).json({ events });
     } catch (error) {
         console.error('Error fetching calendar events:', error);

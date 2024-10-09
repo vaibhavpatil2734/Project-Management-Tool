@@ -3,36 +3,35 @@ import { motion } from 'framer-motion';
 import './mycalendar.css';
 import {
     format,
-    addDays,
+    addMonths,
     startOfMonth,
     endOfMonth,
     startOfWeek,
     endOfWeek,
     isSameMonth,
     isSameDay,
+    addDays,
 } from 'date-fns';
 
 export default function MyCalendar() {
     const [events, setEvents] = useState([]); // State to store fetched events
-    const [selectedDate, setSelectedDate] = useState(null); // State for selected date
     const [newEventDetail, setNewEventDetail] = useState(''); // State for new event input
     const [displayMonth, setDisplayMonth] = useState(new Date()); // State for the current month
+    const [expandedDays, setExpandedDays] = useState(new Set()); // Track expanded days
     const token = localStorage.getItem('token');
     const projectTitle = JSON.parse(localStorage.getItem('projectData')).title;
 
-    // Fetch calendar events from backend
+    // Fetch calendar events from the backend
     const fetchEvents = async () => {
         try {
-            const response = await fetch(
-                `http://localhost:5000/api/calendar/fetchCalendarEvents/${projectTitle}`,
-                {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            const response = await fetch('http://localhost:5000/api/calendar/fetchCalendarEvents', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ title: projectTitle }),
+            });
             const data = await response.json();
             if (response.ok) {
                 setEvents(data.events); // Expecting { events: [...] } from the backend
@@ -44,16 +43,16 @@ export default function MyCalendar() {
         }
     };
 
-    // Fetch events when the component mounts
+    // Fetch events when the component mounts or the display month changes
     useEffect(() => {
-        fetchEvents(); // Fetch events when component mounts or display month changes
+        fetchEvents();
     }, [displayMonth]);
 
-    // Handle page visibility change to refetch events when the user navigates back to the page
+    // Refetch events when user navigates back to the page
     useEffect(() => {
         const handleVisibilityChange = () => {
             if (!document.hidden) {
-                fetchEvents(); // Refetch events when the user comes back to the page
+                fetchEvents();
             }
         };
 
@@ -65,8 +64,14 @@ export default function MyCalendar() {
 
     // Create a new event
     const createEvent = async () => {
-        if (!newEventDetail || !selectedDate) {
-            alert('Please provide an event detail and date.');
+        if (!newEventDetail) {
+            alert('Please provide event details.');
+            return;
+        }
+
+        const selectedDate = Array.from(expandedDays)[0]; // Get the currently selected date from expandedDays
+        if (!selectedDate) {
+            alert('Please select a date to add an event.');
             return;
         }
 
@@ -84,6 +89,7 @@ export default function MyCalendar() {
             if (response.ok) {
                 setEvents((prevEvents) => [...prevEvents, data]); // Assuming data contains the new event
                 setNewEventDetail(''); // Clear input after submission
+                setExpandedDays(new Set()); // Clear expanded days after adding event
             } else {
                 console.error('Failed to create event:', data.message);
             }
@@ -92,7 +98,20 @@ export default function MyCalendar() {
         }
     };
 
-    // Display a specific month on the calendar
+    // Toggle expand/collapse for a specific day
+    const toggleExpandDay = (formattedDate) => {
+        setExpandedDays((prev) => {
+            const newExpandedDays = new Set(prev);
+            if (newExpandedDays.has(formattedDate)) {
+                newExpandedDays.delete(formattedDate); // Collapse if already expanded
+            } else {
+                newExpandedDays.add(formattedDate); // Expand if not already expanded
+            }
+            return newExpandedDays;
+        });
+    };
+
+    // Display the calendar grid
     const renderCalendar = () => {
         const startMonth = startOfMonth(displayMonth);
         const endMonth = endOfMonth(displayMonth);
@@ -106,7 +125,7 @@ export default function MyCalendar() {
             const formattedDate = format(currentDay, 'yyyy-MM-dd');
             const dayEvents = events.filter((event) => format(new Date(event.date), 'yyyy-MM-dd') === formattedDate);
             const isCurrentMonth = isSameMonth(currentDay, displayMonth);
-            const isSelectedDay = isSameDay(currentDay, selectedDate);
+            const isSelectedDay = expandedDays.has(formattedDate);
 
             // Count events for the current day
             const eventCount = dayEvents.length;
@@ -120,7 +139,7 @@ export default function MyCalendar() {
                     key={formattedDate}
                     className={`calendar-day ${isCurrentMonth ? '' : 'not-current-month'} ${isSelectedDay ? 'selected' : ''}`}
                     style={{ backgroundColor: eventColor }}
-                    onClick={() => setSelectedDate(formattedDate)} // Change the date on click
+                    onClick={() => toggleExpandDay(formattedDate)} // Toggle expand on click
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                 >
@@ -161,9 +180,9 @@ export default function MyCalendar() {
 
             {/* Calendar Header */}
             <div className="calendar-header">
-                <button onClick={() => setDisplayMonth(addDays(displayMonth, -30))}>{'<'}</button>
+                <button onClick={() => setDisplayMonth(addMonths(displayMonth, -1))}>{'<'}</button>
                 <span>{format(displayMonth, 'MMMM yyyy')}</span>
-                <button onClick={() => setDisplayMonth(addDays(displayMonth, 30))}>{'>'}</button>
+                <button onClick={() => setDisplayMonth(addMonths(displayMonth, 1))}>{'>'}</button>
             </div>
 
             {/* Weekday Labels */}
@@ -179,9 +198,9 @@ export default function MyCalendar() {
             </div>
 
             {/* Event Input */}
-            {selectedDate && (
+            {expandedDays.size > 0 && (
                 <motion.div className="event-input" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                    <h3>Add Event on {format(new Date(selectedDate), 'MMMM dd, yyyy')}</h3>
+                    <h3>Add Event on {format(new Date(Array.from(expandedDays)[0]), 'MMMM dd, yyyy')}</h3>
                     <input
                         type="text"
                         value={newEventDetail}
