@@ -1,19 +1,16 @@
-// Register.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Correct import
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './register.css'; // For custom animations
+import './register.css'; // Custom animations
 
 export default function Register() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    compId:'',
+    compId: '',
     password: '',
     role: 'user',
   });
-
-  //const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +27,7 @@ export default function Register() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData), // Use formData here
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
@@ -38,87 +35,91 @@ export default function Register() {
       } else {
         console.error('Registration failed');
       }
-
-      console.log(response);
     } catch (error) {
       console.error('Registration error:', error);
     }
   };
 
   return (
-    <div className="container my-5">
-      <div className="row justify-content-center">
-        <div className="col-lg-16 col-md-16">
-          <div className="card shadow-lg custom-card-width">
-            <div className="card-body p-4">
-              <h2 className="text-center mb-4">Register</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="form-group mb-3">
-                  <label htmlFor="name">Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group mb-3">
-                  <label htmlFor="password">Company Id</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="compId"
-                    name="compId"
-                    value={formData.compId}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group mb-3">
-                  <label htmlFor="email">Email address</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group mb-3">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group mb-3">
-                  <label htmlFor="role">Role</label>
-                  <select
-                    className="form-control"
-                    id="role"
-                    name="role"
-                    value={formData.role}
-                    onChange={handleChange}
-                  >
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
-                <button type="submit" className="btn btn-primary w-100">Register</button>
-              </form>
-            </div>
+    <div className="register-container">
+      {/* Live animated graphs */}
+      <div className="graph-background">
+        <div className="live-graph-line"></div>
+        <div className="pie-chart"></div>
+        <div className="candle-graph"></div>
+      </div>
+
+      <div className="register-card">
+        <h2 className="register-title">Register</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group mb-3">
+            <label htmlFor="name" className="register-label">Name</label>
+            <input
+              type="text"
+              className="form-control register-input"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
           </div>
-        </div>
+
+          <div className="form-group mb-3">
+            <label htmlFor="compId" className="register-label">Company ID</label>
+            <input
+              type="text"
+              className="form-control register-input"
+              id="compId"
+              name="compId"
+              value={formData.compId}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group mb-3">
+            <label htmlFor="email" className="register-label">Email address</label>
+            <input
+              type="email"
+              className="form-control register-input"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group mb-3">
+            <label htmlFor="password" className="register-label">Password</label>
+            <input
+              type="password"
+              className="form-control register-input"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group mb-3">
+            <label htmlFor="role" className="register-label">Role</label>
+            <select
+              className="form-control register-input"
+              id="role"
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+
+          <button type="submit" className="register-btn">Register</button>
+        </form>
       </div>
     </div>
   );

@@ -10,16 +10,8 @@ function App() {
   return (
     <>
       <Navbar />
-      <Sidebar/>
       <Body/>
       
-      {/* <div className="container mt-5">
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} /> 
-          <Route path="/CreateProject" element={<CreateProject/>} />
-        </Routes>
-      </div> */}
     </>
   );
 }

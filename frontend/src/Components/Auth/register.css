@@ -1,18 +1,166 @@
-/* Register.css */
-@keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+/* register.css */
+
+/* Fullscreen background and centered form with reduced size */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  width: 100vw;
+  padding-top: 5%; /* Top position */
+  position: relative;
+  background: linear-gradient(180deg, #141E30, #243B55);
+}
+
+/* Form wrapper with reduced width */
+.register-card {
+  max-width: 600px;
+  width: 90%; /* Reduced size by 5% */
+  padding: 30px;
+  border-radius: 15px;
+  background: rgba(36, 36, 62, 0.9); /* Transparent background for modern effect */
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.7);
+  color: white;
+  position: relative;
+}
+
+/* Headline for the form */
+.register-title {
+  font-family: 'Orbitron', sans-serif;
+  color: #00ffea;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2.2rem;
+}
+
+/* Form fields */
+.register-input {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #00ffea;
+  padding: 15px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.register-input:focus {
+  border-color: #ff004c;
+}
+
+.register-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Button */
+.register-btn {
+  background-color: #00ffea;
+  color: #1c1c3d;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.register-btn:hover {
+  background-color: #ff004c;
+  color: white;
+}
+
+/* Live graph background */
+.graph-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0.2;
+  animation: fade-in 1s ease-in-out forwards;
+}
+
+/* Keyframe animations for graph elements */
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
-  
-  .card {
-    animation: fadeIn 1s ease-in-out;
+  to {
+    opacity: 0.2;
   }
-  
-  .card-body {
-    animation: fadeIn 1s ease-in-out;
+}
+
+.live-graph-line {
+  width: 100%;
+  height: 300px;
+  background: linear-gradient(90deg, rgba(0, 255, 234, 0.5), rgba(255, 0, 76, 0.5));
+  position: relative;
+  animation: grow-graph 5s infinite ease-in-out;
+}
+
+@keyframes grow-graph {
+  0% {
+    height: 50px;
   }
-  
+  50% {
+    height: 150px;
+  }
+  100% {
+    height: 50px;
+  }
+}
+
+/* Pie chart animation */
+.pie-chart {
+  width: 250px;
+  height: 250px;
+  background: conic-gradient(#ff004c 0% 33%, #00ffea 33% 66%, #1c1c3d 66% 100%);
+  border-radius: 50%;
+  animation: rotate-chart 8s infinite linear;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+@keyframes rotate-chart {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Candle graph as a background */
+.candle-graph {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 200px;
+  background: repeating-linear-gradient(
+    to right,
+    #1c1c3d 0,
+    #1c1c3d 10px,
+    #00ffea 10px,
+    #00ffea 15px
+  );
+  animation: candle-fluctuate 10s infinite linear;
+}
+
+@keyframes candle-fluctuate {
+  0%, 100% {
+    transform: translateX(-50%) scaleY(1);
+  }
+  50% {
+    transform: translateX(-50%) scaleY(0.5);
+  }
+}
