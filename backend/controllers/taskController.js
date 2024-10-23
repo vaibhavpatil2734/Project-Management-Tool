@@ -41,12 +41,10 @@ exports.createTask = async (req, res) => {
   }
 };
 
-// Get all tasks by project title
 exports.getTasks = async (req, res) => {
   try {
     const { title } = req.body; // Extract project title from the request body
 
-    // Check if title is provided
     if (!title) {
       return res.status(400).json({ error: 'Project title is required.' });
     }

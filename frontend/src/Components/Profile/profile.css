@@ -1,97 +1,130 @@
-/* Style for the profile card */
-.profile-card {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 300px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background-color: white;
-}
-
-/* Center the user icon */
-.profile-header {
+/* Profile container - full screen with space theme */
+.profile-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #000000 60%, #1b1b1b 100%);
   display: flex;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-/* Logout button styles */
-.logout-button {
-  margin-top: 15px;
-  align-self: flex-start;
-  padding: 10px 20px;
-  background-color: #dc3545;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  font-family: 'Star Jedi', sans-serif; /* Star Wars-themed font */
 }
 
-.logout-button:hover {
-  background-color: #c82333;
-}
-
-/* Optional: Style the profile-body details */
-.profile-body {
-  font-size: 16px;
-  line-height: 1.6;
-}
-/* Style for the profile card */
-.profile-card {
+/* Background stars animation */
+.background-animation {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://cdn.pixabay.com/photo/2018/03/30/12/13/universe-3278194_1280.png');
+  background-size: cover;
+  animation: moveBackground 30s linear infinite;
+}
+
+@keyframes moveBackground {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-1000px);
+  }
+}
+
+/* Moving circles for dynamic effect */
+.moving-circles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
   width: 300px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px 10px rgba(0, 0, 255, 0.5);
+  animation: pulseCircle 5s ease-in-out infinite;
+}
+
+@keyframes pulseCircle {
+  0%, 100% {
+    transform: scale(1) translate(-50%, -50%);
+  }
+  50% {
+    transform: scale(1.2) translate(-50%, -50%);
+  }
+}
+
+/* Profile card with a futuristic, transparent look */
+.profile-card {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 60%;
+  max-width: 600px;
+  animation: fadeIn 2s ease-out;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Profile name and role with glowing effect */
+.profile-name {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #f0f0f0;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.profile-role {
+  font-size: 1.5rem;
+  color: #f5f5f5;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Progress bar container */
+.progress-bar-container {
+  margin-top: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
-  background-color: white;
+  height: 20px;
+  overflow: hidden;
 }
 
-/* Position the close button on the top-right corner */
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: blue;
+.progress {
+  height: 100%;
+  background-color: #00ff99;
+  width: 0;
+  animation: progressBarAnim 3s infinite;
+  box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
 }
 
-.close-button:hover {
-  color: #dc3545; /* Change color on hover */
+@keyframes progressBarAnim {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
 }
 
-/* Center the user icon */
-.profile-header {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-/* Logout button styles */
-.logout-button {
-  margin-top: 15px;
-  align-self: flex-start;
-  padding: 10px 20px;
-  background-color: #dc3545;
-  color: rgb(255, 255, 255);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.logout-button:hover {
-  background-color: #c82333;
-}
-
-/* Optional: Style the profile-body details */
-.profile-body {
-  font-size: 16px;
-  line-height: 1.6;
+/* Fade in animation for profile card */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

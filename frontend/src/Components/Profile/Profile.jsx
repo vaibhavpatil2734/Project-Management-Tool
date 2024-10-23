@@ -1,61 +1,52 @@
-import React, { useState } from 'react';
-import { FaUserCircle, FaTimes } from 'react-icons/fa'; // Import close icon from Font Awesome
-import './profile.css'; // Import your custom CSS for profile styling
+import React, { useState, useEffect } from 'react';
+import { FaUserCircle, FaEnvelope, FaBuilding } from 'react-icons/fa';
+import './profile.css';
 
-let nameNav; // Declare the variable for exporting
+let nameNav;
 
 export default function Profile({ profiledata }) {
-  const [isVisible, setIsVisible] = useState(true); // State to control the visibility of the profile card
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const progressInterval = setInterval(() => {
+      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 1));
+    }, 50);
+
+    return () => clearInterval(progressInterval);
+  }, []);
 
   if (!profiledata) {
-    return <div>Loading...</div>; // Handle the case where profile data is not available yet
+    return <div>Loading...</div>;
   }
 
   const { name, email, role, compId } = profiledata;
-
-  nameNav = name; // Assign the value of name to nameNav
-
-  // Logout handler
-  const handleLogout = () => {
-    // Clear all data from local storage
-    localStorage.clear(); // Clear all local storage data
-    alert('Logged out successfully!');
-    // Redirect or handle other logout logic
-    window.location.href = '/login';
-  };
-
-  // Close button handler
-  const handleClose = () => {
-    setIsVisible(false); // Hide the profile card by setting isVisible to false
-  };
-
-  if (!isVisible) {
-    return null; // Return null when the profile card is hidden
-  }
+  nameNav = name;
 
   return (
-    <div className="profile-card">
-      <div className="profile-header">
-        {/* Close button with icon */}
-        <button className="close-button" onClick={handleClose}>
-          <FaTimes size={20} />
-        </button>
-        
-        <FaUserCircle size={80} className="profile-icon" />
-        <h3>{name}</h3>
-        <p className="text-muted">{role}</p>
-        <button className="btn btn-danger logout-button" onClick={handleLogout}>
-          Logout
-        </button>
-      </div>
+    <div className="profile-container">
+      <div className="background-animation"></div>
+      <div className="moving-circles"></div>
       
-      <div className="profile-body">
-        <p><strong>Email:</strong> {email}</p>
-        <p><strong>Company ID:</strong> {compId}</p>
+      <div className="profile-card animate">
+        <div className="profile-header">
+          <FaUserCircle size={120} className="profile-icon" />
+          <div className="profile-name">{name}</div>
+          <div className="profile-role">{role}</div>
+        </div>
+
+        <div className="profile-body">
+          <p><FaEnvelope /> <strong>Email:</strong> {email}</p>
+          <p><FaBuilding /> <strong>Company ID:</strong> {compId}</p>
+        </div>
+
+        <div className="progress-bar-container">
+          <div className="progress-bar">
+            <div className="progress" style={{ width: `${progress}%` }}></div>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-// Export the nameNav variable
 export { nameNav };

@@ -12,6 +12,7 @@ import Chat from '../../Chat/Chat';
 import MyCalendar from '../../MyCalendar/MyCalendar';
 import './body.css'; // Custom styles
 import Sidebar from '../Sidebar/sidebar';
+import Base from '../../Base/Base';
 
 export default function Body() {
   const [profiledata, setProfiledata] = useState(null);
@@ -21,17 +22,22 @@ export default function Body() {
     setProfiledata(profile);
     setLoginCount(1); // Set login count to 1 after login
   };
-  const getLoginCount = (count)=>{
-    setLoginCount(count)
-  }
+
+  const getLoginCount = (count) => {
+    setLoginCount(count);
+  };
 
   return (
-    <div className='body-wrapper'>
+    <div className="bodyposition">
       {/* Conditionally render sidebar if loginCount is 1 */}
-      {loginCount === 1 && <Sidebar/>}
+      {loginCount === 1 && <Sidebar />}
+      
+      {/* Render different components based on login count */}
+      {loginCount === 0 && <Login getprofiledata={getProfiledata} getLoginCount={getLoginCount} />}
       {loginCount === 2 && <Register />}
-      {loginCount === 0 && <Login getprofiledata={getProfiledata} getLoginCount={getLoginCount}  />}k
-      <div className='content-area'>
+      
+      {/* Main content area */}
+      <div className="content-area">
         <Routes>
           <Route path="/CreateProject" element={<CreateProject />} />
           <Route path="/Profile" element={<Profile profiledata={profiledata} />} />
@@ -41,6 +47,7 @@ export default function Body() {
           <Route path="/update-task/:id" element={<UpdateTask />} />
           <Route path="/Chat" element={<Chat />} />
           <Route path="/MyCalendar" element={<MyCalendar />} />
+          <Route path="/Base" element={<Base/>} />
         </Routes>
       </div>
     </div>

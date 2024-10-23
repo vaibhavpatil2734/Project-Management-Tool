@@ -29,6 +29,9 @@ export default function Sidebar() {
   const handleNavigateMyCalendar = () => {
     navigate("/MyCalendar");
   };
+  const handleNavigateToBase = () => {
+    navigate("/Base");
+  };
 
   useEffect(() => {
     const projectData = localStorage.getItem('projectData');
@@ -60,6 +63,7 @@ export default function Sidebar() {
 
       <div className="card menu-card">
         <ul className="sidebar-menu">
+        <li><a className="menu-link" onClick={handleNavigateToBase}>View progress</a></li>
           <li><a className="menu-link" onClick={handleNavigateToViewTask}>View Tasks</a></li>
           <li><a className="menu-link" onClick={handleNavigateToChat}>Chat Room</a></li>
           <li><a className="menu-link" onClick={handleNavigateMyCalendar}>Calendar</a></li>

@@ -1,4 +1,4 @@
-/* Container for full-screen background and center login */
+Container for full-screen background and center login
 .fullscreen-container {
   display: flex;
   justify-content: center;
