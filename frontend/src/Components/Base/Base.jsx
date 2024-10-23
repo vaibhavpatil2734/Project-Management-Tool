@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, PieChart, Pie, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
-import { FaTasks, FaProjectDiagram } from 'react-icons/fa'; // Icons
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
+import { FaTasks, FaProjectDiagram } from 'react-icons/fa';
 import './Base.css'; // Custom CSS for styling
 
 export default function Base() {
@@ -97,6 +97,15 @@ export default function Base() {
     { name: 'Low', value: lowPriorityCount }
   ];
 
+  // Sample line chart data for tasks over time or some metric
+  const lineChartData = [
+    { name: 'Week 1', Tasks: 12 },
+    { name: 'Week 2', Tasks: 25 },
+    { name: 'Week 3', Tasks: 18 },
+    { name: 'Week 4', Tasks: 28 },
+    { name: 'Week 5', Tasks: 15 }
+  ];
+
   return (
     <div className="base-container">
       <div className="header">
@@ -105,10 +114,25 @@ export default function Base() {
       </div>
       {error && <p className="error">{error}</p>}
 
-      {/* Main grid container for two rows of charts */}
+      {/* Line chart occupying the whole row */}
+      <div className="line-chart-container">
+        <h2>Task Overview Over Time</h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={lineChartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="Tasks" stroke="#8884d8" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Main grid container for charts */}
       <div className="chart-grid">
 
-        {/* First row: Task Status */}
+        {/* Task Status - Bar Chart */}
         <div className="chart-item">
           <h2><FaTasks className="icon" /> Task Status - Bar Chart</h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -127,6 +151,7 @@ export default function Base() {
           </ResponsiveContainer>
         </div>
 
+        {/* Task Status - Pie Chart */}
         <div className="chart-item">
           <h2><FaTasks className="icon" /> Task Status - Pie Chart</h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -139,7 +164,7 @@ export default function Base() {
                 cy="50%"
                 outerRadius={100}
                 fill="#82ca9d"
-                label
+                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
               >
                 {taskStatusData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={['#00C49F', '#FFBB28', '#FF8042'][index % 3]} />
@@ -151,7 +176,7 @@ export default function Base() {
           </ResponsiveContainer>
         </div>
 
-        {/* Second row: Task Priority */}
+        {/* Task Priority - Bar Chart */}
         <div className="chart-item">
           <h2><FaTasks className="icon" /> Task Priority - Bar Chart</h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -170,6 +195,7 @@ export default function Base() {
           </ResponsiveContainer>
         </div>
 
+        {/* Task Priority - Pie Chart */}
         <div className="chart-item">
           <h2><FaTasks className="icon" /> Task Priority - Pie Chart</h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -182,7 +208,7 @@ export default function Base() {
                 cy="50%"
                 outerRadius={100}
                 fill="#82ca9d"
-                label
+                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
               >
                 {taskPriorityData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={['#FF8042', '#FFBB28', '#00C49F'][index % 3]} />
