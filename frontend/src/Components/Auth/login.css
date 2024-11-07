@@ -1,14 +1,14 @@
-Container for full-screen background and center login
+/* Container for full-screen background and center login */
 .fullscreen-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 403.5%;  /* 100% width */
+  width: 100%; /* Full width of the viewport */
   height: 100vh; /* Full height of the viewport */
   background-color: #0e1420; /* Dark background color */
   position: relative;
   overflow: hidden; /* Hide overflow from moving elements */
-  
+  margin: 0; /* Ensure no margins */
 }
 
 /* Background animation container */
@@ -110,9 +110,9 @@ Container for full-screen background and center login
   }
 }
 
-/* Custom card styling */
+/* Custom card width increase */
 .custom-card-width {
-  max-width: 400px;
+  max-width: 500px; /* Increased width */
   background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent */
   border-radius: 15px;
   padding: 2rem;
@@ -122,45 +122,55 @@ Container for full-screen background and center login
   z-index: 10; /* Above background animation */
 }
 
+/* Hover effect on the custom card */
 .custom-card-width:hover {
   transform: scale(1.05);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
+/* Ensuring the form input fields fill more space */
 input.form-control {
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   border: none;
-  padding: 10px;
+  padding: 12px; /* Increased padding for a more spacious feel */
   border-radius: 8px;
   transition: box-shadow 0.3s ease-in-out;
+  width: 100%; /* Make the input fields take up full width of the container */
 }
 
-input.form-control:focus {
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  outline: none;
+/* Add some width adjustments for smaller screens (responsive design) */
+@media (max-width: 768px) {
+  .custom-card-width {
+    max-width: 100%;
+    padding: 1.5rem; /* Adjust padding on smaller screens */
+  }
+
+  input.form-control {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
 }
 
 button.btn-primary {
   background-color: #27ae60;
   border: none;
-  padding: 0.75rem;
+  padding: 0.75rem 1.25rem;
   border-radius: 8px;
-  font-size: 1.1rem;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 button.btn-primary:hover {
   background-color: #2ecc71;
-  transform: scale(1.05);
 }
 
-a {
-  color: #3498db;
+/* Text Link Styling */
+.text-center a {
+  color: #ffffff;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-size: 14px;
 }
 
-a:hover {
-  color: #2980b9;
+.text-center a:hover {
+  text-decoration: underline;
 }

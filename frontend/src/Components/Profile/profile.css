@@ -9,59 +9,62 @@
   justify-content: center;
   align-items: center;
   color: white;
-  font-family: 'Star Jedi', sans-serif; /* Star Wars-themed font */
+  font-family: 'Star Jedi', sans-serif;
 }
 
-/* Background stars animation */
+/* Background stars animation with slow movement */
 .background-animation {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('https://cdn.pixabay.com/photo/2018/03/30/12/13/universe-3278194_1280.png');
+  width: 200%;
+  height: 200%;
+  background: url('https://cdn.pixabay.com/photo/2018/03/30/12/13/universe-3278194_1280.png') repeat;
   background-size: cover;
-  animation: moveBackground 30s linear infinite;
+  animation: moveBackground 120s linear infinite;
+  opacity: 0.5;
 }
 
 @keyframes moveBackground {
   from {
-    transform: translateX(0);
+    transform: translateX(0) translateY(0);
   }
   to {
-    transform: translateX(-1000px);
+    transform: translateX(-500px) translateY(-500px);
   }
 }
 
-/* Moving circles for dynamic effect */
+/* Moving circles for dynamic pulsing effect */
 .moving-circles {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 20%;
+  left: 30%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  width: 300px;
-  height: 300px;
+  width: 450px;
+  height: 450px;
   background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 20px 10px rgba(0, 0, 255, 0.5);
-  animation: pulseCircle 5s ease-in-out infinite;
+  box-shadow: 0 0 20px 10px rgba(0, 0, 255, 0.5), 0 0 30px 20px rgba(0, 0, 255, 0.3);
+  animation: pulseCircle 8s ease-in-out infinite;
 }
 
 @keyframes pulseCircle {
   0%, 100% {
-    transform: scale(1) translate(-50%, -50%);
+    transform: scale(1); /* Initial and final scale */
+    box-shadow: 0 0 20px 10px rgba(0, 0, 255, 0.5), 0 0 30px 20px rgba(0, 0, 255, 0.3);
   }
   50% {
-    transform: scale(1.2) translate(-50%, -50%);
+    transform: scale(1.3); /* Scale uniformly from the center */
+    box-shadow: 0 0 30px 15px rgba(0, 255, 255, 0.7), 0 0 40px 30px rgba(0, 255, 255, 0.4);
   }
 }
 
 /* Profile card with a futuristic, transparent look */
 .profile-card {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
   border-radius: 20px;
   padding: 40px;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6);
   text-align: center;
   width: 60%;
   max-width: 600px;
@@ -75,7 +78,7 @@
   font-size: 3rem;
   font-weight: bold;
   color: #f0f0f0;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.4);
 }
 
 .profile-role {
@@ -84,47 +87,26 @@
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-/* Progress bar container */
-.progress-bar-container {
+/* Logout button with modern styling */
+.logout-button {
   margin-top: 20px;
+  background-color: #ff4b5c;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  display: inline-flex;
+  align-items: center;
 }
 
-.progress-bar {
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  height: 20px;
-  overflow: hidden;
+.logout-button:hover {
+  background-color: #ff1f36;
+  transform: scale(1.05);
 }
 
-.progress {
-  height: 100%;
-  background-color: #00ff99;
-  width: 0;
-  animation: progressBarAnim 3s infinite;
-  box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
-}
-
-@keyframes progressBarAnim {
-  0% {
-    width: 0%;
-  }
-  50% {
-    width: 100%;
-  }
-  100% {
-    width: 0%;
-  }
-}
-
-/* Fade in animation for profile card */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.logout-icon {
+  margin-right: 8px;
 }

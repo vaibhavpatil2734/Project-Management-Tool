@@ -4,7 +4,7 @@ import './login.css'; // Custom CSS for animations
 import { useNavigate, Link } from 'react-router-dom'; // Import Link for navigation
 import { motion } from 'framer-motion'; // Framer motion for animation
 
-export default function Login({ getprofiledata, getLoginCount }) { // Using getprofiledata prop
+export default function Login({ getprofiledata, getLoginCount }) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -39,11 +39,11 @@ export default function Login({ getprofiledata, getLoginCount }) { // Using getp
 
         console.log('Login successful. Token:', token);
 
-        // Alert login success
+        // Alert login successs
         alert('Login successful');
 
         // Navigate to the Profile page after sending the data
-        navigate('/Profile');
+        navigate('/dashboard');
       } else {
         console.error('Login failed');
         alert('Invalid credentials, please try again');
@@ -51,6 +51,10 @@ export default function Login({ getprofiledata, getLoginCount }) { // Using getp
     } catch (error) {
       console.error('Error during login', error);
     }
+  };
+
+  const handleNavigateToRegistration = () => {
+    navigate("/register");
   };
 
   return (
@@ -66,7 +70,6 @@ export default function Login({ getprofiledata, getLoginCount }) { // Using getp
         </svg>
       </div>
 
-      {/* Login Card */}
       <motion.div
         className="login-container"
         initial={{ opacity: 0, scale: 0.8 }}
@@ -75,7 +78,7 @@ export default function Login({ getprofiledata, getLoginCount }) { // Using getp
       >
         <div className="container my-5 p-16">
           <div className="row justify-content-center">
-            <div className="col-lg-16 col-md-18">
+            <div className="col-lg-6 col-md-8">
               <motion.div
                 className="card shadow-lg custom-card-width"
                 initial={{ y: -50, opacity: 0 }}
@@ -83,7 +86,7 @@ export default function Login({ getprofiledata, getLoginCount }) { // Using getp
                 transition={{ duration: 0.8 }}
               >
                 <div className="card-body p-4">
-                  <h2 className="text-center mb-4 p-6">Login</h2>
+                  <h2 className="text-center mb-4">Login</h2>
                   <form onSubmit={handleSubmit}>
                     <div className="form-group mb-3">
                       <label htmlFor="email">Email address</label>
@@ -112,7 +115,7 @@ export default function Login({ getprofiledata, getLoginCount }) { // Using getp
                     <button type="submit" className="btn btn-primary w-100">Login</button>
                   </form>
                   <div className="mt-3 text-center">
-                    <Link onClick={()=>{getLoginCount(2)}}>Register if you don't have an account</Link>
+                    <Link onClick={handleNavigateToRegistration}>Register if you don't have an account</Link>
                   </div>
                 </div>
               </motion.div>

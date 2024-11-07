@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route, Outlet } from 'react-router-dom';  // Ensure Outlet is imported
 import CreateProject from '../../Project/CreateProject';
-import Register from '../../Auth/Register';
-import Login from '../../Auth/Login';
 import Profile from '../../Profile/Profile';
 import CreateTasks from '../../CreateTasks/CreateTasks';
 import OpenProject from '../../OpenProject/OpenProject';
@@ -11,35 +9,17 @@ import UpdateTask from '../../UpdateTask/UpdateTask';
 import Chat from '../../Chat/Chat';
 import MyCalendar from '../../MyCalendar/MyCalendar';
 import './body.css'; // Custom styles
-import Sidebar from '../Sidebar/sidebar';
 import Base from '../../Base/Base';
+import Contact from '../../Contact/Contact';
 
-export default function Body() {
-  const [profiledata, setProfiledata] = useState(null);
-  const [loginCount, setLoginCount] = useState(0); // Track login count
-
-  const getProfiledata = (profile) => {
-    setProfiledata(profile);
-    setLoginCount(1); // Set login count to 1 after login
-  };
-
-  const getLoginCount = (count) => {
-    setLoginCount(count);
-  };
+export default function Body({ profiledata }) {  // Accept profiledata as a prop
 
   return (
     <div className="bodyposition">
-      {/* Conditionally render sidebar if loginCount is 1 */}
-      {loginCount === 1 && <Sidebar />}
-      
-      {/* Render different components based on login count */}
-      {loginCount === 0 && <Login getprofiledata={getProfiledata} getLoginCount={getLoginCount} />}
-      {loginCount === 2 && <Register />}
-      
-      {/* Main content area */}
       <div className="content-area">
         <Routes>
-          <Route path="/CreateProject" element={<CreateProject />} />
+          {/* Routes for specific paths */}
+          <Route path="/" element={<CreateProject />} />
           <Route path="/Profile" element={<Profile profiledata={profiledata} />} />
           <Route path="/CreateTasks" element={<CreateTasks />} />
           <Route path="/OpenProject" element={<OpenProject />} />
@@ -47,8 +27,11 @@ export default function Body() {
           <Route path="/update-task/:id" element={<UpdateTask />} />
           <Route path="/Chat" element={<Chat />} />
           <Route path="/MyCalendar" element={<MyCalendar />} />
-          <Route path="/Base" element={<Base/>} />
+          <Route path='/Base' element={<Base/>}/>
+          <Route path='/Contact' element={<Contact/>}/>
         </Routes>
+        {/* Render child routes from Sidebar */}
+        <Outlet />
       </div>
     </div>
   );

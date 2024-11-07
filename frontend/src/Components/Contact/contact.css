@@ -1,0 +1,144 @@
+/* Contact Page Styles */
+.contact-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212; /* Dark background */
+    color: #fff; /* Light text */
+    font-family: 'Arial', sans-serif;
+    overflow: hidden; /* Prevents scrolling during animations */
+  }
+  
+  .contact-container {
+    background: #1e1e1e; /* Dark container */
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transform: translateY(-20px);
+    animation: float 3s infinite ease-in-out; /* Float animation */
+  }
+  
+  .contact-heading {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    animation: fadeInUp 2s forwards;
+  }
+  
+  .popup-message {
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  input, textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #2a2a2a; /* Darker input background */
+    color: white;
+  }
+  
+  input:focus, textarea:focus {
+    border-color: #5560ea;
+    box-shadow: 0 0 5px rgba(85, 96, 234, 0.5);
+  }
+  
+  textarea {
+    resize: none;
+  }
+  
+  .submit-btn {
+    padding: 15px;
+    background-color: #5560ea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #4455cc;
+    transform: scale(1.05);
+  }
+  
+  /* Animation for Floating Effect */
+  @keyframes float {
+    0% {
+      transform: translateY(-20px);
+    }
+    50% {
+      transform: translateY(20px);
+    }
+    100% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  /* Fade In Effect */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Fade In Up Effect */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .contact-container {
+      padding: 30px;
+      width: 90%;
+    }
+  
+    .contact-heading {
+      font-size: 2rem;
+    }
+  
+    .input-group input, .input-group textarea {
+      font-size: 0.9rem;
+    }
+  
+    .submit-btn {
+      font-size: 1rem;
+    }
+  }
+  

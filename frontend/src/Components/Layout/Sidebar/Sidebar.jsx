@@ -1,36 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './sidebar.css';
+import { FaUserCircle } from 'react-icons/fa'; // Profile icon
 
 export default function Sidebar() {
   const navigate = useNavigate();
   const [projectTitle, setProjectTitle] = useState('');
 
   const handleNavigateToOpenProject = () => {
-    navigate("/OpenProject");
+    navigate("/dashboard/OpenProject");
   };
 
   const handleNavigateToCreateProject = () => {
-    navigate("/CreateProject");
+    navigate("/dashboard/");
   };
 
   const handleNavigateToCreateTask = () => {
-    navigate("/CreateTasks");
+    navigate("/dashboard/CreateTasks");
   };
 
   const handleNavigateToViewTask = () => {
-    navigate("/ViewTasks");
+    navigate("/dashboard/ViewTasks");
   };
 
   const handleNavigateToChat = () => {
-    navigate("/Chat");
+    navigate("/dashboard/Chat");
   };
 
   const handleNavigateMyCalendar = () => {
-    navigate("/MyCalendar");
+    navigate("/dashboard/MyCalendar");
   };
   const handleNavigateToBase = () => {
-    navigate("/Base");
+    navigate("/dashboard/Base");
+  };
+  const handleNavigateToContact = () => {
+    navigate("/dashboard/contact");
+  };
+  const handleNavigateToProfile = () => {
+    navigate("/dashboard/profile");
   };
 
   useEffect(() => {
@@ -63,12 +70,23 @@ export default function Sidebar() {
 
       <div className="card menu-card">
         <ul className="sidebar-menu">
-        <li><a className="menu-link" onClick={handleNavigateToBase}>View progress</a></li>
+          <li><a className="menu-link" onClick={handleNavigateToBase}>View progress</a></li>
           <li><a className="menu-link" onClick={handleNavigateToViewTask}>View Tasks</a></li>
           <li><a className="menu-link" onClick={handleNavigateToChat}>Chat Room</a></li>
           <li><a className="menu-link" onClick={handleNavigateMyCalendar}>Calendar</a></li>
-          <li><a className="menu-link" href="#contact">Contact</a></li>
+          <li><a className="menu-link" onClick={handleNavigateToContact}>Contact</a></li>
         </ul>
+      </div>
+
+      {/* New Profile Button */}
+      <div className="profile-nav">
+        <button 
+          className="sidebar-button profile-button" 
+          onClick={handleNavigateToProfile}
+        >
+          <FaUserCircle size={24} className="me-2" />
+          Profile
+        </button>
       </div>
     </div>
   );

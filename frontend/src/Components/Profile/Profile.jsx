@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaUserCircle, FaEnvelope, FaBuilding } from 'react-icons/fa';
+import { FaUserCircle, FaEnvelope, FaBuilding, FaSignOutAlt } from 'react-icons/fa';
 import './profile.css';
 
 let nameNav;
@@ -14,6 +14,12 @@ export default function Profile({ profiledata }) {
 
     return () => clearInterval(progressInterval);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    alert("You have been logged out.");
+    window.location.reload(); // Reload the page or navigate to login
+  };
 
   if (!profiledata) {
     return <div>Loading...</div>;
@@ -39,14 +45,13 @@ export default function Profile({ profiledata }) {
           <p><FaBuilding /> <strong>Company ID:</strong> {compId}</p>
         </div>
 
-        <div className="progress-bar-container">
-          <div className="progress-bar">
-            <div className="progress" style={{ width: `${progress}%` }}></div>
-          </div>
-        </div>
+       
+
+        <button className="logout-button" onClick={handleLogout}>
+          <FaSignOutAlt className="logout-icon" /> Logout
+        </button>
       </div>
     </div>
   );
 }
 
-export { nameNav };
