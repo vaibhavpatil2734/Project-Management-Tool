@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion'; // Install framer-motion using `npm install framer-motion`
 import './chat.css'; // Import the CSS file
 
@@ -8,6 +8,8 @@ export default function Chat() {
     const [projectTitle, setProjectTitle] = useState(''); // State for the project title
     const token = localStorage.getItem('token'); // Retrieve JWT token from local storage
     const currentUser = "YourUsername"; // Set this dynamically based on your logged-in user
+
+    const chatWindowRef = useRef(null); // Ref for chat window
 
     const fetchMessages = async () => {
         try {
@@ -52,6 +54,13 @@ export default function Chat() {
         }
     }, [projectTitle]);
 
+    useEffect(() => {
+        // Scroll to the bottom whenever messages change
+        if (chatWindowRef.current) {
+            chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+        }
+    }, [messages]);
+
     const handleSendMessage = async () => {
         if (!messageInput) {
             alert("Message cannot be empty!");
@@ -86,6 +95,7 @@ export default function Chat() {
             
             {/* Chat window */}
             <motion.div
+                ref={chatWindowRef} // Attach ref to the chat window
                 className="chat-window"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

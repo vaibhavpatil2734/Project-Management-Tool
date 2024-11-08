@@ -123,18 +123,19 @@ export default function CreateProject() {
 
           <div className="form-group mb-3">
             <label htmlFor="assignedUser">Assign Users (Comp ID)</label>
-            <div className="d-flex">
+            <div className="input-group">
               <input
                 type="text"
-                className="form-control"
+                className="AssignWidth "
                 id="assignedUser"
                 value={userCompId}
                 onChange={(e) => setUserCompId(e.target.value)}
                 placeholder="Enter compId"
+                required
               />
               <button
                 type="button"
-                className="btn btn-secondary ms-2"
+                className="add-user-btn btn btn-secondary ms-2"
                 onClick={handleAddUser}
                 disabled={!userCompId.trim()} // Disable if input is empty
               >

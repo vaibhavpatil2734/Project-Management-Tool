@@ -1,99 +1,149 @@
+/* Global Styles */
 body {
-    font-family: 'Arial', sans-serif; /* Modern, clean font */
-    background-color: #e0e7ff; /* Soft blue background for the whole page */
-    color: #1e3a8a; /* Dark blue text color for better readability */
+    font-family: 'Arial', sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #e5e5e5; /* Light text for dark mode */
 }
 
+/* Create Tasks Container */
 .create-tasks-container {
-    max-width: 600px; /* Set a max width for the container */
-    margin: 50px auto; /* Center the container with top margin */
-    padding: 20px; /* Add some padding */
-    background-color: #ffffff; /* White background for the container */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-    border: 1px solid #d1d5db; /* Light border for subtle definition */
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #1f1f1f; /* Dark container background */
+    border-radius: 12px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); /* Darker shadow */
+    border: 1px solid #333; /* Dark border */
 }
 
+/* Header Styling */
 h1 {
-    text-align: center; /* Center the title */
-    font-size: 2.5rem; /* Larger title font size */
-    margin-bottom: 20px; /* Space below title */
-    color: #4f46e5; /* Vibrant purple for the title */
-    font-weight: 600; /* Slightly bolder weight for emphasis */
+    text-align: center;
+    font-size: 2.2rem;
+    color: #e0e0e0; /* Light text color for the heading */
+    font-weight: bold;
+    margin-bottom: 30px;
 }
 
+/* Task Card Style */
 .task-card {
-    margin-bottom: 20px; /* Space between tasks */
-    padding: 15px; /* Add padding */
-    background-color: #f3f4f6; /* Light gray background for task card */
-    border-radius: 8px; /* Softer corners */
-    border: 1px solid #d1d5db; /* Subtle border */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #2a2a2a; /* Dark card background */
+    border-radius: 8px;
+    border: 1px solid #444; /* Dark border for card */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
+/* Input Fields Styling */
 .task-input, .task-select, .task-textarea {
-    width: 100%; /* Full width for inputs */
-    padding: 12px; /* Add padding */
-    margin: 10px 0; /* Space between rows */
-    border: 1px solid #cbd5e1; /* Light border color */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #f0f9ff; /* Light blue background */
-    font-size: 16px; /* Consistent font size */
-    color: #1e3a8a; /* Dark blue text color */
-    transition: border-color 0.2s; /* Smooth transition on focus */
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid #555; /* Darker border */
+    background-color: #333; /* Dark input background */
+    color: #e5e5e5; /* Light text inside inputs */
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
+/* Focus Effect on Inputs */
 .task-input:focus, .task-select:focus, .task-textarea:focus {
-    border-color: #4f46e5; /* Purple border on focus */
-    outline: none; /* Remove outline */
+    border-color: #6200ea; /* Purple color on focus */
+    outline: none;
 }
 
+/* Textarea for Task Description */
 .task-textarea {
-    min-height: 100px; /* Minimum height for the textarea */
+    min-height: 100px;
 }
 
+/* Buttons */
 button {
-    padding: 12px 18px; /* Add padding to buttons */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    color: #ffffff; /* White text color */
-    background-color: #4f46e5; /* Vibrant purple button color */
-    cursor: pointer; /* Pointer cursor on hover */
-    margin-right: 10px; /* Space between buttons */
-    font-family: 'Arial', sans-serif; /* Consistent font style */
-    font-size: 16px; /* Consistent button font size */
-    transition: background-color 0.2s, transform 0.2s; /* Smooth transitions */
+    padding: 12px 18px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 12px;
 }
 
-button:hover {
-    background-color: #4338ca; /* Darken button color on hover */
-    transform: translateY(-2px); /* Slight lift effect on hover */
+/* Button Variants */
+.add-task-btn {
+    background-color: #6200ea; /* Purple button */
+}
+
+.submit-tasks-btn {
+    background-color: #4caf50;
+    margin-left: 2%; /* Green button */
 }
 
 .remove-task-btn {
-    background-color: #dc3545; /* Red color for remove button */
+    background-color: #f44336; /* Red button */
+}
+
+/* Button Hover Effects */
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.add-task-btn:hover {
+    background-color: #3700b3; /* Darker purple */
+}
+
+.submit-tasks-btn:hover {
+    background-color: #388e3c; /* Darker green */
 }
 
 .remove-task-btn:hover {
-    background-color: #c82333; /* Darken on hover */
+    background-color: #d32f2f; /* Darker red */
 }
 
-.add-task-btn, .submit-tasks-btn {
-    background-color: #28a745; /* Green color for add and submit buttons */
+/* Tasks List Section */
+.recent-tasks h2 {
+    font-size: 1.6rem;
+    color: #e0e0e0; /* Light gray color for section titles */
+    margin-top: 30px;
 }
 
-.add-task-btn:hover, .submit-tasks-btn:hover {
-    background-color: #218838; /* Darken on hover */
+.recent-tasks ul {
+    padding: 0;
+    list-style-type: none;
 }
 
-/* Responsive styles */
+.recent-tasks li {
+    font-size: 1.1rem;
+    color: #bdbdbd; /* Light gray text for tasks */
+    margin-bottom: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
+}
+
+/* Footer Styling */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1rem;
+    color: #757575; /* Light gray for footer */
+}
+
+/* Media Query for Small Screens */
 @media (max-width: 768px) {
     .create-tasks-container {
-        padding: 15px; /* Less padding on smaller screens */
+        padding: 20px;
+        margin: 20px;
     }
 
     button {
-        width: 100%; /* Full width for buttons on smaller screens */
-        margin-bottom: 10px; /* Space between buttons */
+        width: 100%; /* Full-width buttons on small screens */
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem; /* Smaller heading on mobile */
     }
 }

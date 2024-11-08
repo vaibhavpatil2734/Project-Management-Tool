@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './OpenProject.css'; // Ensure this path is correct
 
-export default function OpenProject() {
+export default function OpenProject({getProjectCount}) {
   const [title, setTitle] = useState('');
   const [projectData, setProjectData] = useState(null);
   const [error, setError] = useState('');
@@ -10,6 +10,7 @@ export default function OpenProject() {
     const storedProjectData = localStorage.getItem('projectData');
     if (storedProjectData) {
       setProjectData(JSON.parse(storedProjectData));
+      
     }
   }, []);
 
@@ -48,6 +49,8 @@ export default function OpenProject() {
 
       setProjectData(data.project);
       localStorage.setItem('projectData', JSON.stringify(data.project));
+      getProjectCount(1)
+      alert("project data found")
     } catch (err) {
       setError(err.message || 'Server error');
     }

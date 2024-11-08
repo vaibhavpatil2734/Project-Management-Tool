@@ -12,7 +12,7 @@ import './body.css'; // Custom styles
 import Base from '../../Base/Base';
 import Contact from '../../Contact/Contact';
 
-export default function Body({ profiledata }) {  // Accept profiledata as a prop
+export default function Body({ profiledata ,getProjectCount }) {  // Accept profiledata as a prop
 
   return (
     <div className="bodyposition">
@@ -22,7 +22,7 @@ export default function Body({ profiledata }) {  // Accept profiledata as a prop
           <Route path="/" element={<CreateProject />} />
           <Route path="/Profile" element={<Profile profiledata={profiledata} />} />
           <Route path="/CreateTasks" element={<CreateTasks />} />
-          <Route path="/OpenProject" element={<OpenProject />} />
+          <Route path="/OpenProject" element={<OpenProject getProjectCount={getProjectCount}/>} />
           <Route path="/ViewTasks" element={<ViewTasks />} />
           <Route path="/update-task/:id" element={<UpdateTask />} />
           <Route path="/Chat" element={<Chat />} />

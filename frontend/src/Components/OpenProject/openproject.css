@@ -1,27 +1,85 @@
 .open-project-container {
-    max-width: 600px; /* Set a max width for the container */
-    margin: 0 auto; /* Center the container */
-    padding: 20px; /* Add some padding */
-    border: 1px solid #ccc; /* Light gray border for the container */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #f9f9f9; /* Light background color */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  }
-  
-  .project-title-input {
-    border: 1px solid #007bff; /* Bootstrap primary color border */
-  }
-  
-  .open-project-button {
-    width: 100%; /* Full-width button */
-  }
-  
-  .error-message {
-    margin-top: 15px; /* Space above the error message */
-  }
-  
-  .project-details-card {
-    background-color: #fff; /* White background for project details */
-    border: 1px solid #ddd; /* Light border */
-  }
-  
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  font-size: 2rem;
+  color: #ffcc00;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.project-title-input {
+  border: 2px solid #ffcc00;
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  padding: 10px;
+  width: 100%; /* Full width for input */
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.project-title-input::placeholder {
+  color: #cccccc;
+}
+
+.project-title-input:focus {
+  background-color: #2b2b2b; /* Darker background when focused */
+  color: #ffffff; /* White text for better contrast */
+  outline: none;
+}
+
+.open-project-button {
+  width: 100%;
+  background-color: #ffcc00;
+  color: #2b2b2b;
+  font-size: 1.2rem;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px; /* Add space above button */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.open-project-button:hover {
+  background-color: #e0a800;
+  color: #fff;
+}
+
+.error-message {
+  margin-top: 15px;
+  color: #ff4d4d;
+  font-size: 1.1rem;
+}
+
+.project-details-card {
+  background-color: #3a3a3a;
+  border: 1px solid #4d4d4d;
+  padding: 15px;
+  border-radius: 5px;
+  color: #e0e0e0;
+}
+
+.project-details-card .card-title {
+  font-size: 1.5rem;
+  color: #ffcc00;
+}
+
+.project-details-card .card-text {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+}

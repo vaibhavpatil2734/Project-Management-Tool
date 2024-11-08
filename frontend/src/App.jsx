@@ -9,10 +9,15 @@ import './App.css';
 
 function App() {
   const [profiledata, setProfiledata] = useState(null);
-
+  const [projectCount, setprojectCount] = useState(0)
   const getProfiledata = (profile) => {
     setProfiledata(profile); // Set profile data
   };
+  const getProjectCount = (count) => {
+    setprojectCount(count);
+  }
+
+
 
   return (
     <>
@@ -27,8 +32,8 @@ function App() {
           element={
             profiledata ? (
               <div className="app-container">
-                <Sidebar />
-                <Body profiledata={profiledata} />
+                <Sidebar projectCount={projectCount}/>
+                <Body profiledata={profiledata} getProjectCount={getProjectCount}/>
               </div>
             ) : (
               <Navigate to="/" />  // If not logged in, redirect to login page

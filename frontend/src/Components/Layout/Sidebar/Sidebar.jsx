@@ -3,9 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import './sidebar.css';
 import { FaUserCircle } from 'react-icons/fa'; // Profile icon
 
-export default function Sidebar() {
+export default function Sidebar({ projectCount }) {
   const navigate = useNavigate();
   const [projectTitle, setProjectTitle] = useState('');
+
+  // Conditional navigation function
+  const handleConditionalNavigation = (navigateTo) => {
+    if (projectCount === 1) {
+      navigate(navigateTo);
+    } else {
+      alert("Please open a project first.");
+    }
+  };
 
   const handleNavigateToOpenProject = () => {
     navigate("/dashboard/OpenProject");
@@ -15,27 +24,10 @@ export default function Sidebar() {
     navigate("/dashboard/");
   };
 
-  const handleNavigateToCreateTask = () => {
-    navigate("/dashboard/CreateTasks");
-  };
-
-  const handleNavigateToViewTask = () => {
-    navigate("/dashboard/ViewTasks");
-  };
-
-  const handleNavigateToChat = () => {
-    navigate("/dashboard/Chat");
-  };
-
-  const handleNavigateMyCalendar = () => {
-    navigate("/dashboard/MyCalendar");
-  };
-  const handleNavigateToBase = () => {
-    navigate("/dashboard/Base");
-  };
   const handleNavigateToContact = () => {
     navigate("/dashboard/contact");
   };
+
   const handleNavigateToProfile = () => {
     navigate("/dashboard/profile");
   };
@@ -54,13 +46,22 @@ export default function Sidebar() {
 
       <div className="card button-card">
         <div className="button-container">
-          <button className="sidebar-button add-project-button" onClick={handleNavigateToCreateProject}>
+          <button 
+            className="sidebar-button add-project-button" 
+            onClick={handleNavigateToCreateProject}
+          >
             Create Project
           </button>
-          <button className="sidebar-button add-task-button" onClick={handleNavigateToCreateTask}>
+          <button 
+            className="sidebar-button add-task-button" 
+            onClick={() => handleConditionalNavigation("/dashboard/CreateTasks")}
+          >
             Create Task
           </button>
-          <button className="sidebar-button add-task-button" onClick={handleNavigateToOpenProject}>
+          <button 
+            className="sidebar-button add-task-button" 
+            onClick={handleNavigateToOpenProject}
+          >
             Open Project
           </button>
         </div>
@@ -70,15 +71,50 @@ export default function Sidebar() {
 
       <div className="card menu-card">
         <ul className="sidebar-menu">
-          <li><a className="menu-link" onClick={handleNavigateToBase}>View progress</a></li>
-          <li><a className="menu-link" onClick={handleNavigateToViewTask}>View Tasks</a></li>
-          <li><a className="menu-link" onClick={handleNavigateToChat}>Chat Room</a></li>
-          <li><a className="menu-link" onClick={handleNavigateMyCalendar}>Calendar</a></li>
-          <li><a className="menu-link" onClick={handleNavigateToContact}>Contact</a></li>
+          <li>
+            <a 
+              className="menu-link" 
+              onClick={() => handleConditionalNavigation("/dashboard/Base")}
+            >
+              View progress
+            </a>
+          </li>
+          <li>
+            <a 
+              className="menu-link" 
+              onClick={() => handleConditionalNavigation("/dashboard/ViewTasks")}
+            >
+              View Tasks
+            </a>
+          </li>
+          <li>
+            <a 
+              className="menu-link" 
+              onClick={() => handleConditionalNavigation("/dashboard/Chat")}
+            >
+              Chat Room
+            </a>
+          </li>
+          <li>
+            <a 
+              className="menu-link" 
+              onClick={() => handleConditionalNavigation("/dashboard/MyCalendar")}
+            >
+              Calendar
+            </a>
+          </li>
+          <li>
+            <a 
+              className="menu-link" 
+              onClick={handleNavigateToContact}
+            >
+              Contact
+            </a>
+          </li>
         </ul>
       </div>
 
-      {/* New Profile Button */}
+      {/* Profile Button */}
       <div className="profile-nav">
         <button 
           className="sidebar-button profile-button" 

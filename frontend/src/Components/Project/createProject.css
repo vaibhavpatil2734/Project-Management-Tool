@@ -1,35 +1,130 @@
-/* createProject.css */
+/* Global Styles */
+.app-body {
+  font-family: 'Arial', sans-serif;
+  background-color: #121212; /* Dark background */
+  color: #e5e5e5; /* Light text for dark mode */
+}
 
-/* Fade-in animation for the entire form */
+/* Create Tasks Container */
+.create-tasks-container {
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #1f1f1f; /* Dark container background */
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); /* Darker shadow */
+  border: 1px solid #333; /* Dark border */
+}
+
+/* Form Container */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #e0e0e0;
+}
+
 .fade-in {
-    animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Title Style */
+.form-title {
+  font-size: 2rem;
+  color: #ffcc00;
+  text-align: center;
+}
+
+/* Form background and shadow */
+.form-bg {
+  background-color: #2b2b2b; /* Dark background for form */
+  border: 1px solid #4d4d4d;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+/* Input fields styling */
+.form-control {
+  background-color: #3a3a3a;
+  border: 2px solid #ffcc00;
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.form-control::placeholder {
+  color: #cccccc;
+}
+
+/* Input focus effect */
+.form-control:focus {
+  background-color: #2b2b2b; /* Darker when focused */
+  color: #ffffff; /* White text for better contrast */
+  outline: none;
+}
+
+/* Button styling */
+.btn-animate {
+  background-color: #ffcc00;
+  color: #2b2b2b;
+  font-size: 1.2rem;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  transition: transform 0.2s, background-color 0.3s;
+  margin-top: 10px;
+}
+
+.btn-animate:hover {
+  transform: scale(1.05); /* Slight scaling on hover */
+  background-color: #e0a800;
+  color: #fff;
+}
+
+/* Button for adding assigned user */
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Assigned users list items */
+.list-group-item {
+  background-color: #3a3a3a;
+  border: 1px solid #4d4d4d;
+  color: #e0e0e0;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  /* Button hover effect with smooth transition */
-  .btn-animate {
-    transition: transform 0.2s, background-color 0.3s;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .btn-animate:hover {
-    transform: scale(1.05); /* Slight scaling effect on hover */
-    background-color: #0056b3; /* Darken the button on hover */
-  }
-  
-  /* Form background with subtle shadow */
-  .form-bg {
-    background-color: #f8f9fa; /* Light grey background for form */
-    border: 1px solid #dee2e6; /* Border for form */
-  }
-  
-  /* Fade-in keyframes */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
+}
+
+
+.AssignWidth{
+  width: 100%;
+}
