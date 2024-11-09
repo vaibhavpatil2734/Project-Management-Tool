@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from './Components/Auth/Register';
 import Login from './Components/Auth/Login';
 import Navbar from './Components/Layout/Navbar/Navbar';
-import Sidebar from './Components/Layout/Sidebar/sidebar';
+import Sidebar from './Components/Layout/Sidebar/Sidebar';
 import Body from './Components/Layout/Body/Body';
 import { useState, useEffect } from 'react';
 import './App.css';

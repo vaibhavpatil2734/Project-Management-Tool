@@ -56,7 +56,7 @@ export default function UpdateTask() {
     } catch (error) {
       console.error('Error updating task:', error);
     }
-    navigate("/ViewTasks")
+    navigate("/dashboard/ViewTasks")
   };
 
   return (

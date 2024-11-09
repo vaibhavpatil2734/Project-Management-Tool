@@ -10,16 +10,13 @@ export default function ViewTasks() {
   const navigate = useNavigate(); // Initialize the navigation function
 
   useEffect(() => {
-    // Retrieve the project title from local storage
     const projectData = localStorage.getItem('projectData');
     if (projectData) {
       const parsedData = JSON.parse(projectData);
 
-      // Set project title from parsed data
       setProjectTitle(parsedData.title);
       console.log('Project Title from local storage:', parsedData.title); // Debugging purpose
 
-      // Fetch tasks using the project title
       fetchTasks(parsedData.title);
     } else {
       setError('No project data found in local storage.');
@@ -33,7 +30,7 @@ export default function ViewTasks() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title }), // Sending only title in the request body
+        body: JSON.stringify({ title }),
       });
 
       if (!response.ok) {
@@ -42,19 +39,20 @@ export default function ViewTasks() {
 
       const data = await response.json();
       if (data.tasks) {
-        setTasks(data.tasks); // Set the tasks if successfully retrieved
+        setTasks(data.tasks);
       } else {
-        setError(data.message); // Handle no tasks found scenario
+        setError(data.message);
       }
     } catch (err) {
-      console.error(err); // Log the error for debugging
+      console.error(err);
       setError(err.message || 'Failed to fetch tasks.');
     }
   };
 
   const handleEditClick = (taskId) => {
-    // Navigate to the UpdateTask component with the task ID
-    navigate(`/update-task/${taskId}`);
+    alert("Navigating to task: " + taskId);
+    // Debugging output
+    navigate(`/dashboard/update-task/${taskId}`);
   };
 
   return (
@@ -65,7 +63,6 @@ export default function ViewTasks() {
         {tasks.length > 0 ? (
           tasks.map((task) => (
             <div key={task._id} className={`task-item priority-${task.Priority.toLowerCase()}`}>
-              {/* First Row: Task Title, Status, Assigned To, Priority, and Edit Button */}
               <div className="task-columns">
                 <div className="task-column"><strong>Title:</strong> {task.Tasktitle || 'No Title'}</div>
                 <div className="task-column"><strong>Status:</strong> {task.status || 'No Status'}</div>
@@ -78,7 +75,6 @@ export default function ViewTasks() {
                 </div>
               </div>
 
-              {/* Second Row: Description (visible on hover) */}
               <div className="task-details">
                 <p><strong>Description:</strong> {task.description || 'No Description'}</p>
               </div>
