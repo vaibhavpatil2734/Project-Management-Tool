@@ -74,7 +74,7 @@ exports.getTasks = async (req, res) => {
 
 exports.updateTask = async (req, res) => {
   try {
-    const { id } = req.params; // Get the task ID from the URL
+    const { id } = req.body; // Get the task ID from the URL
     const updatedFields = req.body; // Get the fields to update from the request body
 
     // Find the task by ID and update only the provided fields
