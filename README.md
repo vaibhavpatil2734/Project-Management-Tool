@@ -8,6 +8,14 @@ Clone the repo and get started today!
 
 ---
 
+## 🖼️ Project Overview
+
+Here is a screenshot of the project:
+
+![Project Image](images/link-2.png)
+
+---
+
 ## 🚀 Features
 
 - **Real-time Collaboration**: Stay updated with live notifications when tasks or project details change.
