@@ -12,7 +12,7 @@ Clone the repo and get started today!
 
 Here is a screenshot of the project:
 
-![Project Image](images/link-2.png)
+![Project Image](image/link-2.png)
 
 ---
 
