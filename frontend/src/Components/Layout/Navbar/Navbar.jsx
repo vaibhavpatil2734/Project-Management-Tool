@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Make sure to import Link for navigation
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
-import './Navbar.css'; // Import the CSS file for custom styling
+import './navbar.css'; // Import the CSS file for custom styling
 import { FaUserCircle } from 'react-icons/fa'; // Font Awesome for profile icon (optional)
 
 
