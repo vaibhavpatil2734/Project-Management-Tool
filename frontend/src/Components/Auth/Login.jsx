@@ -44,7 +44,7 @@ export default function Login({ getprofiledata }) {
   return (
     <div className="fullscreen-container">
       <div className="cardOne">
-        <h2 className="text-center mb-4">Login</h2>
+        <h2 className="text-center mb-4">- Login -</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-3">
             <label htmlFor="email">Email address</label>
