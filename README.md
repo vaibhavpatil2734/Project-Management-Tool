@@ -12,7 +12,8 @@ Clone the repo and get started today!
 
 Here is a screenshot of the project:
 
-![Project Image](images/link-2.png)
+![Project Image](https://github.com/vaibhavpatil2734/Project-Management-Tool/blob/main/image/link%202.png?raw=true)
+
 
 ---
 
