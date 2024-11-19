@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { FaTasks, FaProjectDiagram } from 'react-icons/fa';
-import './Base.css'; // Custom CSS for styling
+import './base.css'; // Custom CSS for styling
 
 export default function Base() {
   const [tasks, setTasks] = useState([]);

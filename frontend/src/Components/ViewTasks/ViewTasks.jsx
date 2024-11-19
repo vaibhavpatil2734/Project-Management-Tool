@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './ViewTasks.css'; // Import CSS for styling
+import './viewtasks.css'; // Import CSS for styling
 import { FaPencilAlt } from 'react-icons/fa'; // Importing pencil icon from react-icons
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 

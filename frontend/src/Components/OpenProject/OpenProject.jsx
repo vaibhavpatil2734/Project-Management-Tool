@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './OpenProject.css'; // Ensure this path is correct
+import './openproject.css'; // Ensure this path is correct
 
 export default function OpenProject({getProjectCount}) {
   const [title, setTitle] = useState('');
