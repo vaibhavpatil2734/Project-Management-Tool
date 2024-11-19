@@ -1,5 +1,5 @@
 const express = require('express');
-const { createCalendarEvent, fetchCalendarEvents } = require('../controllers/CalendarController');
+const { createCalendarEvent, fetchCalendarEvents } = require('../controllers/calendarController');
 
 const router = express.Router();
 
