@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom'; // Correct import
+import { useNavigate } from 'react-router-dom'; // Correct import
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './register.css'; // Custom animations
 
@@ -32,6 +32,8 @@ export default function Register() {
 
       if (response.ok) {
         alert('Registration Successfully Completed!!!');
+        // Redirect to login page after successful registration
+        navigate("/");
       } else {
         console.error('Registration failed');
       }
@@ -39,10 +41,8 @@ export default function Register() {
       console.error('Registration error:', error);
     }
   };
-  const navigate = useNavigate()
-  const handleNavigateToLogin = ()=>{
-    navigate("/")
-  }
+
+  const navigate = useNavigate();
 
   return (
     <div className="register-container">
@@ -122,7 +122,7 @@ export default function Register() {
             </select>
           </div>
 
-          <button type="submit" className="register-btn" onClick={handleNavigateToLogin}>Register</button>
+          <button type="submit" className="register-btn">Register</button>
         </form>
       </div>
     </div>

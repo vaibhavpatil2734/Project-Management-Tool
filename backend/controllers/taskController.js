@@ -3,18 +3,19 @@ const Task = require('../models/Task');
 const Project = require('../models/Project');
 const User = require('../models/User'); // Ensure the User model is imported
 
-// Create a new task
 exports.createTask = async (req, res) => {
   try {
-    const { Tasktitle, description, Priority, status, assignedTo, title } = req.body; // Extract task details including projectTitle from the request body
-
-    // Check if the required fields are provided
+    const { Tasktitle, description, Priority, status, assignedTo, title } = req.body; // Extract task details from the request body
+    
+    console.log("Task controller is activated", Tasktitle);
+    
+    // Validate required fields
     if (!Tasktitle || !title) {
       return res.status(400).json({ message: 'Title and Project Title are required.' });
     }
 
     // Find the project based on the project title
-    const project = await Project.findOne({ title: title });
+    const project = await Project.findOne({ title: title.trim() });
 
     if (!project) {
       return res.status(404).json({ message: 'Project not found.' });
@@ -27,20 +28,22 @@ exports.createTask = async (req, res) => {
       Priority,
       status,
       assignedTo,
-      title // Track who created the task
+      title
     });
+    
+    // Log the task object to check its contents
+    console.log("New Task Object:", newTask);
 
     // Save the task to the database
     await newTask.save();
 
-    // Respond with success
+    // Return the response
     res.status(201).json({ message: 'Task created successfully.', task: newTask });
   } catch (error) {
-    console.error('Error creating task:', error);
+    console.error('Error creating task:', error.message); // Log the error
     res.status(500).json({ message: 'Server error. Failed to create task.', error: error.message });
   }
 };
-
 exports.getTasks = async (req, res) => {
   try {
     const { title } = req.body; // Extract project title from the request body

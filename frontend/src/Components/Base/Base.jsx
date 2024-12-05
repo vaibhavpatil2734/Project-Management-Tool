@@ -115,7 +115,7 @@ export default function Base() {
       {error && <p className="error">{error}</p>}
 
       {/* Line chart occupying the whole row */}
-      <div className="line-chart-container">
+      {/* <div className="line-chart-container">
         <h2>Task Overview Over Time</h2>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={lineChartData}>
@@ -127,7 +127,7 @@ export default function Base() {
             <Line type="monotone" dataKey="Tasks" stroke="#8884d8" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
           </LineChart>
         </ResponsiveContainer>
-      </div>
+      </div> */}
 
       {/* Main grid container for charts */}
       <div className="chart-grid">

@@ -2,7 +2,6 @@ const Project = require('../models/Project');
 const User = require('../models/User');
 const mongoose = require('mongoose');
 
-// Create a new project
 exports.createProjects = async (req, res) => {
   try {
     const { title, description, assignedUsers } = req.body;
@@ -46,6 +45,8 @@ exports.createProjects = async (req, res) => {
     res.status(500).json({ message: 'Server error while creating project', details: error.message });
   }
 };
+
+
 
 // Open an existing project
 exports.openProject = async (req, res) => {

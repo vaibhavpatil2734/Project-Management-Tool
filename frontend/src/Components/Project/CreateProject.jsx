@@ -5,7 +5,6 @@ export default function CreateProject() {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    createdBy: '', // This will be the user creating the project (you can set this from user context if needed)
     assignedUsers: [], // List of compIds for the users assigned to the project
   });
 
@@ -108,21 +107,9 @@ export default function CreateProject() {
             />
           </div>
 
-          <div className="form-group mb-3">
-            <label htmlFor="createdBy">Created By (User ID)</label>
-            <input
-              type="text"
-              className="form-control"
-              id="createdBy"
-              name="createdBy"
-              value={formData.createdBy}
-              onChange={handleChange}
-              required
-            />
-          </div>
 
           <div className="form-group mb-3">
-            <label htmlFor="assignedUser">Assign Users (Comp ID)</label>
+            <label htmlFor="assignedUser">Created By (Comp ID) & Assign Users (Comp ID)</label>
             <div className="input-group">
               <input
                 type="text"
@@ -131,7 +118,7 @@ export default function CreateProject() {
                 value={userCompId}
                 onChange={(e) => setUserCompId(e.target.value)}
                 placeholder="Enter compId"
-                required
+                
               />
               <button
                 type="button"
