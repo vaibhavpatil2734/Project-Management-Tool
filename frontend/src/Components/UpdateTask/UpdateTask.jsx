@@ -38,7 +38,7 @@ export default function UpdateTask() {
         Priority: taskData.Priority || taskData.Priority,
       };
 
-      const response = await fetch(`http://localhost:5000/api/tasks/updateTask/${id}`, {
+      const response = await fetch(`https://project-management-tool-5be8.onrender.com/api/tasks/updateTask/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

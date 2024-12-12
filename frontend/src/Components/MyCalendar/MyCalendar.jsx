@@ -24,7 +24,7 @@ export default function MyCalendar() {
 
     const fetchEvents = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/calendar/fetchCalendarEvents', {
+            const response = await fetch('https://project-management-tool-5be8.onrender.com/api/calendar/fetchCalendarEvents', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

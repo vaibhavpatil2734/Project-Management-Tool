@@ -32,7 +32,7 @@ export default function OpenProject({getProjectCount}) {
       return;
     }
     try {
-      const response = await fetch('http://localhost:5000/api/projects/openProject', {
+      const response = await fetch('https://project-management-tool-5be8.onrender.com/api/projects/openProject', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

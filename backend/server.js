@@ -15,7 +15,16 @@ const app = express();
 
 connectDb();
 
-app.use(cors());
+const corsOptions = {
+  origin: [
+    'https://project-management-tool2734.netlify.app',
+    'http://localhost:5000'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // if you need cookies/session support
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -32,7 +41,6 @@ app.use('/api/calendar', calendarRoutes);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5001;
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

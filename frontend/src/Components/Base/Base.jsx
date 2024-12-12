@@ -22,7 +22,7 @@ export default function Base() {
   // Fetch tasks from API
   const fetchAllTasks = async (title) => {
     try {
-      const response = await fetch('http://localhost:5000/api/tasks/getTasks', {
+      const response = await fetch('https://project-management-tool-5be8.onrender.com/api/tasks/getTasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

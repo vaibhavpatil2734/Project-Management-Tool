@@ -55,7 +55,7 @@ export default function CreateTasks() {
 
       const responses = await Promise.all(
         tasks.map((task) => {
-          return fetch('http://localhost:5000/api/tasks/createTask', {
+          return fetch('https://project-management-tool-5be8.onrender.com/api/tasks/createTask', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

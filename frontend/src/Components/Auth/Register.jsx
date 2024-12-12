@@ -22,7 +22,7 @@ export default function Register() {
     console.log('Form submitted:', formData);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch('https://project-management-tool-5be8.onrender.com/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

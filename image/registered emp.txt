@@ -1,0 +1,10 @@
+
+
+| **Name**  | **Email ID**          | **Password**   | **Company ID** | **Role** |  
+|-----------|-----------------------|----------------|----------------|----------|  
+| Luke      | luke@company.com      | luke123        | 1              | Admin    |  
+| Leia      | leia@company.com      | leia123        | 2              | User     |  
+| Han       | han@company.com       | han123         | 3              | User     |  
+| Vader     | vader@company.com     | vader123       | 4              | Admin    |  
+| Yoda      | yoda@company.com      | yoda123        | 5              | User     |  
+
