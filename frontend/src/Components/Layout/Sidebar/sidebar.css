@@ -1,3 +1,4 @@
+/* Sidebar styles */
 .sidebar {
   position: fixed;
   top: 55px;
@@ -13,6 +14,17 @@
   overflow-y: auto; 
 }
 
+/* Always visible sidebar for laptop view */
+@media (min-width: 768px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+  .menu-button {
+    display: none; /* Hide toggle button on laptop view */
+  }
+}
+
+/* Sidebar hover effect */
 .sidebar:hover {
   background-color: #2c3034;
 }
@@ -25,26 +37,21 @@
 
 /* Card styles */
 .card {
-  background-color: #495057; /* Darker card background */
-  border-radius: 8px; /* Rounded corners */
-  padding: 15px; /* Inner padding for the card */
-  margin-bottom: 20px; /* Space between cards */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-}
-.cardprofile { /* Darker card background */
-  border-radius: 8px; /* Rounded corners */
-  padding: 0px; /* Inner padding for the card */
+  background-color: #495057;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.button-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* Space between buttons */
+.cardprofile {
+  border-radius: 8px;
+  padding: 0;
 }
 
 /* Button styles */
 .add-project-button, .add-task-button, .profile-button {
-  background-color: #007bff; /* Button background color */
+  background-color: #007bff;
   border: none;
   color: white;
   padding: 0.5rem 1rem;
@@ -56,7 +63,7 @@
 }
 
 .add-project-button:hover, .add-task-button:hover, .profile-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
 /* Sidebar menu styles */
@@ -124,12 +131,13 @@
 
 .profile-button:hover {
   background-color: #1abc9c;
-  transform: translateX(10px); /* Subtle animation to the right on hover */
+  transform: translateX(10px);
 }
 
 .profile-button svg {
   margin-right: 10px;
 }
+
 /* Menu button for mobile view */
 .menu-button {
   display: none;
@@ -148,7 +156,7 @@
   height: 32px;
 }
 
-/* Sidebar visibility */
+/* Sidebar visibility animations */
 .sidebar {
   transition: transform 0.3s ease-in-out;
 }
@@ -161,7 +169,7 @@
   transform: translateX(0);
 }
 
-/* Mobile view */
+/* Mobile view adjustments */
 @media (max-width: 768px) {
   .menu-button {
     display: block;
@@ -169,14 +177,11 @@
 
   .sidebar {
     position: fixed;
-    top: 0;
+
     left: 0;
     height: 100%;
     width: 250px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 999;
     transform: translateX(-100%);
   }
 }
-
-

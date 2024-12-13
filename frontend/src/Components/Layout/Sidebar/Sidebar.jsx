@@ -40,9 +40,11 @@ export default function Sidebar({ projectCount, sidbarcout }) {
     }
   }, []);
 
-  // Only render the sidebar if sidbarcout is 1
+  // Check if it's a laptop view or mobile view
+  const isLaptopView = window.innerWidth >= 1024;
+
   return (
-    <div className={`sidebar ${sidbarcout === 1 ? 'visible' : 'hidden'}`}>
+    <div className={`sidebar ${isLaptopView ? 'visible' : (sidbarcout === 1 ? 'visible' : 'hidden')}`}>
       <h2 className="sidebar-header">Project Manager</h2>
 
       <div className="card button-card">
@@ -77,7 +79,7 @@ export default function Sidebar({ projectCount, sidbarcout }) {
               className="menu-link" 
               onClick={() => handleConditionalNavigation("/dashboard/Base")}
             >
-              View progress
+              View Progress
             </a>
           </li>
           <li>
@@ -114,8 +116,9 @@ export default function Sidebar({ projectCount, sidbarcout }) {
           </li>
         </ul>
       </div>
+
       <div className="cardprofile">
-      <button 
+        <button 
           className="sidebar-button profile-button" 
           onClick={handleNavigateToProfile}
         >
