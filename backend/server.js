@@ -18,7 +18,7 @@ connectDb();
 const corsOptions = {
   origin: [
     'https://project-management-tool2734.netlify.app',
-    'http://localhost:5000'
+    'http://localhost:5173'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true, // if you need cookies/session support
