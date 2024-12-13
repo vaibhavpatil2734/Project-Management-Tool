@@ -17,11 +17,15 @@ function App() {
     setprojectCount(count);
   }
 
+  const [sidbarcout, setsidbarcout] = useState(0)
 
+const getsidbarcout = (count) => {
+  setsidbarcout(count);
+}
 
   return (
     <>
-      <Navbar />
+      <Navbar getsidbarcout={getsidbarcout}/>
       <Routes>
         <Route path="/" element={<Login getprofiledata={getProfiledata} />} />
         <Route path="/register" element={<Register />} />
@@ -32,7 +36,7 @@ function App() {
           element={
             profiledata ? (
               <div className="app-container">
-                <Sidebar projectCount={projectCount}/>
+                <Sidebar projectCount={projectCount} sidbarcout={sidbarcout}/>
                 <Body profiledata={profiledata} getProjectCount={getProjectCount}/>
               </div>
             ) : (

@@ -1,32 +1,33 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Make sure to import Link for navigation
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
-import './navbar.css'; // Import the CSS file for custom styling
-import { FaUserCircle } from 'react-icons/fa'; // Font Awesome for profile icon (optional)
+import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './navbar.css';
+import { FaBars } from 'react-icons/fa';
 
+export default function Navbar({ getsidbarcout }) {
+  const [count, setCount] = useState(0);
 
-// Navbar component
-export default function Navbar() {
+  const toggleCount = () => {
+    const newCount = count === 0 ? 1 : 0;
+    setCount(newCount);
+    getsidbarcout(newCount);
+  };
 
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div className="container">
-          <Link className="navbar-brand" >OrbitMatrix</Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+        <div className="container d-flex justify-content-between align-items-center">
+          <Link className="navbar-brand">OrbitMatrix</Link>
+
+          {/* Button to toggle count, visible only on mobile view */}
+          <button 
+            className="btn btn-dark d-lg-none" 
+            onClick={toggleCount}
           >
-            <span className="navbar-toggler-icon"></span>
+            <FaBars />
           </button>
         </div>
       </nav>
     </>
   );
 }
-

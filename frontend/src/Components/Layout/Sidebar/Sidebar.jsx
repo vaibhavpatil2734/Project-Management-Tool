@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './sidebar.css';
-import { FaUserCircle } from 'react-icons/fa'; // Profile icon
+import { FaUserCircle } from 'react-icons/fa';
 
-export default function Sidebar({ projectCount }) {
+export default function Sidebar({ projectCount, sidbarcout }) {
   const navigate = useNavigate();
   const [projectTitle, setProjectTitle] = useState('');
 
@@ -40,8 +40,9 @@ export default function Sidebar({ projectCount }) {
     }
   }, []);
 
+  // Only render the sidebar if sidbarcout is 1
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${sidbarcout === 1 ? 'visible' : 'hidden'}`}>
       <h2 className="sidebar-header">Project Manager</h2>
 
       <div className="card button-card">
@@ -113,10 +114,8 @@ export default function Sidebar({ projectCount }) {
           </li>
         </ul>
       </div>
-
-      {/* Profile Button */}
-      <div className="profile-nav">
-        <button 
+      <div className="cardprofile">
+      <button 
           className="sidebar-button profile-button" 
           onClick={handleNavigateToProfile}
         >
