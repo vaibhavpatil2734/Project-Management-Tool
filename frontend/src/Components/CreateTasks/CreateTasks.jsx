@@ -149,20 +149,17 @@ export default function CreateTasks() {
                 className="task-input"
               />
             </div>
-            <button type="button" className="remove-task-btn" onClick={() => handleRemoveTask(currentTaskIndex)}>
-              Remove Task
-            </button>
           </div>
         )}
         <button type="button" className="add-task-btn" onClick={handleAddTask}>
-          Add Another Task
+          Clear Form
         </button>
         <button type="submit" className="submit-tasks-btn">
-          Create Tasks
+          Create Task
         </button>
       </form>
       <div className="recent-tasks">
-        <h2>Recently Created Tasks:</h2>
+        <h3 className='mt-4'>Recently Created Tasks:</h3>
         <ul>
           {createdTaskTitles.map((Tasktitle, index) => (
             <li key={index}>{Tasktitle}</li>

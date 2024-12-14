@@ -30,15 +30,37 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 .calendar-header button:hover {
     background: #555;
 }
 
-.calendar-header span {
-    font-size: 1.2em;
-    font-weight: bold;
+/* Media Query for Smaller Buttons on Mobile */
+@media (max-width: 768px) {
+    .calendar-header button {
+        padding: 5px;
+        font-size: 0.8rem;
+        min-width: 40px;
+        height: 40px;
+        font-weight: bold;
+    }
+
+    .weekday-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        padding: 0 5px;
+    }
+
+    .weekday-label {
+        text-align: center;
+        font-weight: bold;
+        padding: 5px;
+        width: 14%;
+    }
 }
 
 /* Weekday Labels */
@@ -72,6 +94,8 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 .calendar-day:hover {
@@ -105,6 +129,7 @@
     background-color: #222;
     color: #fff;
     margin-bottom: 15px;
+    font-size: 1rem;
 }
 
 .event-input button {
@@ -115,10 +140,24 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s ease;
+    font-weight: bold;
 }
 
 .event-input button:hover {
     background: #2e4477;
+}
+
+/* Media Query for Smaller Event Input Form on Mobile */
+@media (max-width: 768px) {
+    .event-input input {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .event-input button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
 }
 
 /* Event List Section */
@@ -138,6 +177,8 @@
     border-radius: 5px;
     margin-bottom: 10px;
     transition: background 0.3s ease;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 .event-item:hover {
@@ -149,9 +190,60 @@
 }
 
 .event-item .event-number {
-    background-color: #3b5998;
     color: white;
-    padding: 4px 8px;
-    border-radius: 50%;
+    width: 5px;
+    
 }
 
+/* Media Query to Reduce Everything by 20% on Mobile */
+@media (max-width: 768px) {
+    .calendar-container {
+        padding: 15px;
+    }
+
+    .calendar-header {
+        font-size: 0.9rem;
+    }
+    .calendar-header-buttons {
+        max-width: 5px;
+    }
+
+    .calendar-day {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    .weekday-label {
+        font-size: 0.9rem;
+    }
+
+    .event-input input {
+        font-size: 0.9rem;
+    }
+
+    .event-input button {
+        font-size: 0.9rem;
+    }
+
+    .event-list-section {
+        padding: 10px;
+        background-color: #2e4477;
+    }
+
+    .event-item {
+        font-size: 0.9rem;
+    }
+    .event-detail {
+        padding-left: 8px;
+        font-weight: normal;
+        color: #bbb;
+        text-align: left;
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+}
+
+.event-detail {
+    padding-left: 8px;
+}

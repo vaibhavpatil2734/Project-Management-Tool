@@ -10,4 +10,25 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     padding: 20px; /* Add some padding inside the container */
   }
-  
+  .bodyposition {
+    position: absolute;
+    top: 7.5%;
+    left: 16.5%;
+    background-color: #000000; /* Light blue background color */
+    width: 83.5%;
+    min-height: 92.5%;
+    overflow: auto;
+    border-radius: 8px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    padding: 20px; /* Add some padding inside the container */
+}
+
+@media (max-width: 768px) {
+    .bodyposition {
+        width: 100%; /* Full width for mobile screens */
+        left: 0%;    /* Align to the left for mobile screens */
+        top: 5%;     /* Adjust top for better positioning on small screens */
+        border-radius: 0; /* Remove rounded corners for edge-to-edge layout */
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+}

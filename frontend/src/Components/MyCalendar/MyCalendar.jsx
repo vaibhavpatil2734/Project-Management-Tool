@@ -127,9 +127,9 @@ export default function MyCalendar() {
         <div className="calendar-container">
             <h2>Calendar - {projectTitle}</h2>
             <div className="calendar-header">
-                <button onClick={() => setDisplayMonth(addMonths(displayMonth, -1))}>{'<'}</button>
+                <button className='calendar-header-buttons' onClick={() => setDisplayMonth(addMonths(displayMonth, -1))}>{'<'}</button>
                 <span>{format(displayMonth, 'MMMM yyyy')}</span>
-                <button onClick={() => setDisplayMonth(addMonths(displayMonth, 1))}>{'>'}</button>
+                <button className='calendar-header-buttons' onClick={() => setDisplayMonth(addMonths(displayMonth, 1))}>{'>'}</button>
             </div>
             <div className="weekday-labels">
                 {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, idx) => (
@@ -139,7 +139,7 @@ export default function MyCalendar() {
                 ))}
             </div>
             <div className="calendar-grid">{renderCalendar()}</div>
-            
+
             <motion.div className="event-input" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
                 <h3>Events on {selectedDate ? format(new Date(selectedDate), 'MMMM dd, yyyy') : 'Select a Date'}</h3>
                 <input
@@ -150,7 +150,7 @@ export default function MyCalendar() {
                 />
                 <button onClick={createEvent}>Add Event</button>
             </motion.div>
-            
+
             <div className="event-list-section">
                 <h3>Event List</h3>
                 {events
@@ -163,7 +163,12 @@ export default function MyCalendar() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: idx * 0.1 }}
                         >
-                            <span className="event-number">{idx + 1}.</span> {event.eventDetail}
+                            <span className="event-number">{idx + 1}.</span>
+                            <br />
+                            <div className="event-detail">
+                                {event.eventDetail}
+                            </div>
+
                         </motion.div>
                     ))}
             </div>

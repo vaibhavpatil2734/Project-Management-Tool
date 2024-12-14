@@ -32,7 +32,7 @@ h1, h2 {
 .chart-grid {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Two equal columns */
-  gap: 20px; /* Space between the grid items */
+  gap: 20px;
   justify-items: stretch;
 }
 
@@ -71,4 +71,44 @@ h1, h2 {
 /* Animation for Recharts Pie */
 .recharts-pie-sector:hover {
   transform: scale(1.05);
+}
+
+/* Media Queries for Responsiveness */
+
+/* For screens smaller than 768px (Tablets and Mobile) */
+@media (max-width: 768px) {
+  .chart-grid {
+    grid-template-columns: 1fr; /* Single column */
+  }
+
+  .chart-item {
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .icon {
+    font-size: 1.3rem;
+  }
+}
+
+/* For screens between 768px and 1200px (Laptops) */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .chart-item {
+    padding: 20px;
+  }
+}
+
+/* Adjust padding for very large screens */
+@media (min-width: 1200px) {
+  .base-container {
+    padding: 40px;
+  }
 }

@@ -109,7 +109,7 @@ export default function CreateProject() {
 
 
           <div className="form-group mb-3">
-            <label htmlFor="assignedUser">Created By (Comp ID) & Assign Users (Comp ID)</label>
+            <label htmlFor="assignedUser">Created By (Company ID) & Assign Users (Company ID)</label>
             <div className="input-group">
               <input
                 type="text"
@@ -117,7 +117,7 @@ export default function CreateProject() {
                 id="assignedUser"
                 value={userCompId}
                 onChange={(e) => setUserCompId(e.target.value)}
-                placeholder="Enter compId"
+                placeholder="Enter Company ID"
                 
               />
               <button
@@ -140,12 +140,14 @@ export default function CreateProject() {
                   <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                     {compId}
                     <button
-                      type="button"
-                      className="btn btn-danger btn-sm"
-                      onClick={() => handleRemoveUser(compId)}
-                    >
-                      Remove
-                    </button>
+                        type="button"
+                        className="btn btn-danger btn-sm remove-btn"
+                        onClick={() => handleRemoveUser(compId)}
+                      >
+                        <span className="remove-text">Remove</span>
+                        <span className="remove-icon">✖</span>
+                      </button>
+
                   </li>
                 ))}
               </ul>

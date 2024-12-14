@@ -128,3 +128,39 @@
 .AssignWidth{
   width: 100%;
 }
+
+/* Remove button styling */
+.remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+}
+
+/* Default (desktop view) */
+.remove-text {
+  display: inline;
+}
+
+.remove-icon {
+  display: none;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  .remove-text {
+    display: none; /* Hide "Remove" text */
+  }
+
+  .remove-icon {
+    display: inline; /* Show the "X" icon */
+  }
+
+  .remove-btn {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    font-size: 1rem;
+    justify-content: center;
+  }
+}
