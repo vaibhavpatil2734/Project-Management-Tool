@@ -110,3 +110,28 @@
 .logout-icon {
   margin-right: 8px;
 }
+/* Adjust profile card for mobile view */
+@media (max-width: 768px) {
+  .profile-card {
+    width: 80%; /* Use 80% of the screen width */
+    padding: 20px; /* Reduce padding for smaller screens */
+  }
+
+  .profile-name {
+    font-size: 2.5rem; /* Slightly smaller font size */
+  }
+
+  .profile-role {
+    font-size: 1.25rem; /* Adjust font size */
+  }
+
+  .logout-button {
+    font-size: 0.9rem; /* Adjust button font size */
+    padding: 10px 20px; /* Adjust button padding */
+  }
+
+  .moving-circles {
+    width: 300px; /* Smaller size for circles */
+    height: 300px;
+  }
+}

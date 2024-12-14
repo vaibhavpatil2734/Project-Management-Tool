@@ -39,7 +39,7 @@ export default function ViewTasks() {
 
       const data = await response.json();
       if (data.tasks) {
-        setTasks(data.tasks);
+        setTasks(data.tasks.map(task => ({ ...task, expanded: false }))); // Add expanded state
       } else {
         setError(data.message);
       }
@@ -53,6 +53,14 @@ export default function ViewTasks() {
     navigate(`/dashboard/update-task/${taskId}`);
   };
 
+  const toggleTaskDetails = (taskId) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task._id === taskId ? { ...task, expanded: !task.expanded } : task
+      )
+    );
+  };
+
   return (
     <div className="view-tasks">
       <h1>Tasks for Project: {projectTitle || 'Loading...'}</h1>
@@ -60,22 +68,31 @@ export default function ViewTasks() {
       <div className="task-container">
         {tasks.length > 0 ? (
           tasks.map((task) => (
-            <div key={task._id} className={`task-item priority-${task.Priority.toLowerCase()}`}>
+            <div
+              key={task._id}
+              className={`task-item ${task.expanded ? 'expand' : ''} priority-${task.Priority.toLowerCase()}`}
+              onClick={() => toggleTaskDetails(task._id)} // Add click handler
+            >
               <div className="task-columns">
                 <div className="task-column"><strong>Title:</strong> {task.Tasktitle || 'No Title'}</div>
-                <div className="task-column"><strong>Status:</strong> {task.status || 'No Status'}</div>
                 <div className="task-column"><strong>Assigned To:</strong> {task.assignedTo || 'Unassigned'}</div>
-                <div className="task-column priority-column"><strong>Priority:</strong> {task.Priority || 'None'}</div>
-                <div className="task-column edit-icon">
-                  <button className="edit-btn" onClick={() => handleEditClick(task._id)}>
-                    <FaPencilAlt /> {/* Pencil icon */}
-                  </button>
-                </div>
               </div>
 
-              <div className="task-details">
-                <p><strong>Description:</strong> {task.description || 'No Description'}</p>
-              </div>
+              {task.expanded && (
+                <div className="task-details">
+                  <p><strong>Status:</strong> {task.status || 'No Status'}</p>
+                  <p><strong>Priority:</strong> {task.Priority || 'None'}</p>
+                  <p><strong>Description:</strong> {task.description || 'No Description'}</p>
+                  <div className="edit-icon">
+                    <button className="edit-btn" onClick={(e) => {
+                      e.stopPropagation(); // Prevent event propagation to the parent div
+                      handleEditClick(task._id);
+                    }}>
+                      <FaPencilAlt /> {/* Pencil icon */}
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ))
         ) : (
