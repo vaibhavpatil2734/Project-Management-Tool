@@ -178,22 +178,33 @@ export default function Base() {
 
         {/* Task Priority - Bar Chart */}
         <div className="chart-item">
-          <h2><FaTasks className="icon" /> Task Priority - Bar Chart</h2>
-          <ResponsiveContainer width="100%" height={300}>
+          <h2>
+            <FaTasks className="icon" /> Task Priority - Bar Chart
+          </h2>
+          <ResponsiveContainer width="80%" height={300}>
             <BarChart data={taskPriorityData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
+              <XAxis dataKey="priority" /> {/* Display priority labels */}
               <YAxis />
               <Tooltip />
               <Legend />
               <Bar dataKey="value" fill="#FF8042">
-                {taskPriorityData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={['#FF8042', '#FFBB28', '#00C49F'][index % 3]} />
-                ))}
+                {taskPriorityData.map((entry, index) => {
+                  const color = ['#FF8042', '#FFBB28', '#00C49F'][index % 3];
+                  return (
+                    <Cell 
+                      key={`cell-${index}`} 
+                      fill={color} 
+                    />
+                  );
+                })}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
         </div>
+
+
+
 
         {/* Task Priority - Pie Chart */}
         <div className="chart-item">
@@ -223,3 +234,4 @@ export default function Base() {
     </div>
   );
 }
+
