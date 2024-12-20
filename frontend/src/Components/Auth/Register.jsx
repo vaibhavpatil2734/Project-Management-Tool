@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Correct import
+import { useNavigate , Link } from 'react-router-dom'; // Correct import
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './register.css'; // Custom animations
+import './register.css'; // Custom CSS for styling
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -46,14 +46,7 @@ export default function Register() {
 
   return (
     <div className="register-container">
-      {/* Live animated graphs */}
-      <div className="graph-background">
-        <div className="live-graph-line"></div>
-        <div className="pie-chart"></div>
-        <div className="candle-graph"></div>
-      </div>
-
-      <div className="register-card">
+      <div className="register-card mt-5">
         <h2 className="register-title">Register</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-3">
@@ -123,6 +116,7 @@ export default function Register() {
           </div>
 
           <button type="submit" className="register-btn">Register</button>
+          <Link to="/" className='text-light m-3 mt-5'>Login Page</Link>
         </form>
       </div>
     </div>

@@ -7,6 +7,8 @@
   flex-direction: column;
   gap: 20px;
   margin: 20px;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent wrapping */
 }
 
 /* Header Styling */
@@ -31,9 +33,9 @@ h1, h2 {
 /* Chart Container */
 .chart-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* Ensure all charts fit dynamically */
   gap: 20px;
-  justify-items: stretch;
+  justify-items: center; /* Center-align charts in their cells */
 }
 
 /* Individual Chart Styling */
@@ -43,6 +45,14 @@ h1, h2 {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow: hidden; /* Prevent content overflow */
+  width: 100%; /* Allow chart items to adapt to grid */
+}
+
+/* Adjust Chart Responsiveness */
+.chart-item > .recharts-wrapper {
+  max-width: 100%; /* Ensure charts respect their container boundaries */
+  width: 100%;
 }
 
 /* Hover Effect for Charts */
@@ -59,56 +69,37 @@ h1, h2 {
   text-align: center;
 }
 
-/* Animation for Recharts Bar */
-.recharts-bar-rectangle {
-  transition: transform 0.3s ease;
-}
+/* Media Queries */
 
-.recharts-bar-rectangle:hover {
-  transform: scale(1.1);
-}
-
-/* Animation for Recharts Pie */
-.recharts-pie-sector:hover {
-  transform: scale(1.05);
-}
-
-/* Media Queries for Responsiveness */
-
-/* For screens smaller than 768px (Tablets and Mobile) */
+/* For smaller screens (Tablets and Mobile) */
 @media (max-width: 768px) {
   .chart-grid {
-    grid-template-columns: 1fr; /* Single column */
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Horizontal scrolling for smaller devices */
+    gap: 15px;
   }
 
   .chart-item {
-    padding: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  }
-
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  .icon {
-    font-size: 1.3rem;
+    flex: 0 0 auto; /* Prevent shrinking */
+    min-width: 490px; /* Minimum width for charts */
   }
 }
 
-/* For screens between 768px and 1200px (Laptops) */
+/* For medium-sized screens (Laptops) */
 @media (min-width: 769px) and (max-width: 1200px) {
   .chart-item {
-    padding: 20px;
+    padding: 30px;
   }
 }
 
-/* Adjust padding for very large screens */
+/* For larger screens */
 @media (min-width: 1200px) {
   .base-container {
+    padding: 40px;
+  }
+
+  .chart-item {
     padding: 40px;
   }
 }

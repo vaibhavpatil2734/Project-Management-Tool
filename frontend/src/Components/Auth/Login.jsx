@@ -43,7 +43,7 @@ export default function Login({ getprofiledata }) {
 
   return (
     <div className="fullscreen-container">
-      <div className="cardOne">
+      <div className="cardOne m-2">
         <h2 className="text-center mb-4">- Login -</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-3">
