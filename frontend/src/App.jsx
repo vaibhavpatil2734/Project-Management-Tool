@@ -25,19 +25,18 @@ const getsidbarcout = (count) => {
 
   return (
     <>
-      <Navbar getsidbarcout={getsidbarcout}/>
+      <Navbar getsidbarcout={getsidbarcout} profiledata={profiledata}/>
       <Routes>
         <Route path="/" element={<Login getprofiledata={getProfiledata} />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Protected dashboard route */}
         <Route 
           path="/dashboard/*" 
           element={
             profiledata ? (
               <div className="app-container">
                 <Sidebar projectCount={projectCount} sidbarcout={sidbarcout}/>
-                <Body profiledata={profiledata} getProjectCount={getProjectCount}/>
+                <Body profiledata={profiledata} getProjectCount={getProjectCount} getsidbarcout={getsidbarcout}/>
               </div>
             ) : (
               <Navigate to="/" />  // If not logged in, redirect to login page

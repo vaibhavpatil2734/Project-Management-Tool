@@ -4,13 +4,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './navbar.css';
 import { FaBars } from 'react-icons/fa';
 
-export default function Navbar({ getsidbarcout }) {
+export default function Navbar({ getsidbarcout ,profiledata }) {
   const [count, setCount] = useState(0);
 
   const toggleCount = () => {
+    if(profiledata != null ){
     const newCount = count === 0 ? 1 : 0;
     setCount(newCount);
     getsidbarcout(newCount);
+    }else{
+      alert("Please log in to access the sidebar.")
+    }
   };
 
   return (
