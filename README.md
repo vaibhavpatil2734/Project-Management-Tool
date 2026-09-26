@@ -8,6 +8,14 @@ Clone the repo and get started today!
 
 ---
 
+## 🌐 Live Demo
+
+Try the **Project Management Tool** live:
+
+👉 **[Open Live Project](https://project-management-tool2734.netlify.app/)**
+
+---
+
 ## 🖼️ Project Overview
 
 Here is a screenshot of the project:
